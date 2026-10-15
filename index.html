@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NEXUSDigital — Premier Digital Products & Tools Marketplace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- PAYPAL JAVASCRIPT SDK WITH YOUR LIVE CLIENT ID -->
+  <script src="https://www.paypal.com/sdk/js?client-id=BAAcXpZKSwsG3RmBtUPcIE8nQ5scxoXEp3TUj9_uQIqCrou5RvZIYcrKt5VUOMWtcxHpqbLsvO4am37fe0&currency=USD"></script>
 
   <style>
     :root {
@@ -393,8 +396,8 @@
     .cart-drawer {
       position: fixed;
       top: 0;
-      right: -400px;
-      width: 380px;
+      right: -420px;
+      width: 400px;
       height: 100%;
       background: #11141c;
       border-left: 1px solid var(--border-color);
@@ -435,22 +438,6 @@
       padding: 10px 14px;
       border-radius: 8px;
       border: 1px solid var(--border-color);
-    }
-
-    .checkout-btn {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-
-    .checkout-btn:hover {
-      background: #059669;
     }
 
     .backdrop {
@@ -549,7 +536,7 @@
   <!-- MAIN BODY -->
   <main class="main-container">
 
-    <!-- 01: VIDEO EDITING & VFX (NEW DEDICATED SECTION) -->
+    <!-- 01: VIDEO EDITING & VFX -->
     <section class="category-block" id="video-section" data-category="video">
       <div class="section-header">
         <div class="section-title-wrap">
@@ -560,7 +547,6 @@
       </div>
 
       <div class="product-grid">
-        <!-- Product 1 -->
         <div class="product-card" data-title="Cinematic LUTs & Color Grading Master Pack">
           <span class="card-badge">-85%</span>
           <div class="card-img-wrap">
@@ -579,7 +565,6 @@
           </div>
         </div>
 
-        <!-- Product 2 -->
         <div class="product-card" data-title="Premiere Pro Transitions & Sound FX Suite">
           <span class="card-badge">-80%</span>
           <div class="card-img-wrap">
@@ -598,7 +583,6 @@
           </div>
         </div>
 
-        <!-- Product 3 -->
         <div class="product-card" data-title="After Effects Viral Reels & Shorts Template Kit">
           <span class="card-badge">-90%</span>
           <div class="card-img-wrap">
@@ -617,7 +601,6 @@
           </div>
         </div>
 
-        <!-- Product 4 -->
         <div class="product-card" data-title="AI 3D Motion & Title Animations">
           <span class="card-badge">-82%</span>
           <div class="card-img-wrap">
@@ -854,7 +837,7 @@
 
   </main>
 
-  <!-- CART DRAWER -->
+  <!-- CART DRAWER WITH OFFICIAL PAYPAL BUTTONS -->
   <div class="backdrop" id="backdrop" onclick="toggleCart()"></div>
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-drawer-header">
@@ -865,11 +848,15 @@
       <p style="color:#6b7280; text-align:center; margin-top:40px;">Your cart is empty.</p>
     </div>
     <div style="border-top:1px solid var(--border-color); padding-top:15px; margin-top:auto;">
-      <div style="display:flex; justify-content:space-between; font-weight:700; font-size:18px;">
+      <div style="display:flex; justify-content:space-between; font-weight:700; font-size:18px; margin-bottom: 15px;">
         <span>Total:</span>
         <span id="cartTotal" style="color:var(--accent-orange);">$0</span>
       </div>
-      <button class="checkout-btn" style="width:100%;" onclick="proceedPayPal()">⚡ Checkout with PayPal</button>
+
+      <!-- PAYPAL BUTTON CONTAINER -->
+      <div id="paypal-button-container">
+        <p style="color:#6b7280; font-size:13px; text-align:center;">Add a product to cart to checkout with PayPal</p>
+      </div>
     </div>
   </div>
 
@@ -936,6 +923,7 @@
       if(cart.length === 0) {
         list.innerHTML = '<p style="color:#6b7280; text-align:center; margin-top:40px;">Your cart is empty.</p>';
         totalEl.innerText = '$0';
+        renderPayPalButtons(0);
         return;
       }
 
@@ -956,6 +944,7 @@
       });
 
       totalEl.innerText = '$' + sum;
+      renderPayPalButtons(sum);
     }
 
     function removeFromCart(index) {
@@ -970,13 +959,51 @@
       setTimeout(() => t.classList.remove('show'), 2500);
     }
 
-    function proceedPayPal() {
-      if(cart.length === 0) {
-        alert('Cart is empty!');
+    // PAYPAL SMART BUTTONS RENDER LOGIC
+    function renderPayPalButtons(total) {
+      const container = document.getElementById('paypal-button-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (total <= 0) {
+        container.innerHTML = '<p style="color:#6b7280; font-size:13px; text-align:center;">Add a product to cart to checkout with PayPal</p>';
         return;
       }
-      alert('Redirecting to PayPal Checkout... Total: ' + document.getElementById('cartTotal').innerText);
+
+      if (window.paypal) {
+        paypal.Buttons({
+          style: {
+            layout: 'vertical',
+            color: 'gold',
+            shape: 'rect',
+            label: 'paypal'
+          },
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: total.toString()
+                },
+                description: 'NEXUSDigital Digital Products Order'
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              alert('Payment Successful! Thank you ' + details.payer.name.given_name + '. Your download link has been generated.');
+              cart = [];
+              updateCartUI();
+              toggleCart();
+            });
+          },
+          onError: function(err) {
+            console.error('PayPal Checkout Error:', err);
+            alert('Payment could not be processed. Please try again.');
+          }
+        }).render('#paypal-button-container');
+      }
     }
   </script>
 </body>
 </html>
+
