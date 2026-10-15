@@ -1,2388 +1,982 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS Digital - Premium Marketing Tools</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --amazon-orange: #FF9900;
-            --amazon-orange-dark: #E88B00;
-            --bg: #0D0D0D;
-            --bg-secondary: #1A1A1A;
-            --surface: #252525;
-            --surface-hover: #333333;
-            --text: #FFFFFF;
-            --text-muted: #999999;
-            --border: #333333;
-            --danger: #FF4444;
-            --success: #00D68F;
-            --glow: rgba(255, 153, 0, 0.3);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        /* ========== 3D ANIMATIONS ========== */
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-100px) rotateY(15deg); }
-            to { opacity: 1; transform: translateX(0) rotateY(0deg); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(100px) rotateY(-15deg); }
-            to { opacity: 1; transform: translateX(0) rotateY(0deg); }
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(80px) rotateX(10deg); }
-            to { opacity: 1; transform: translateY(0) rotateX(0deg); }
-        }
-
-        @keyframes float3D {
-            0%, 100% { transform: perspective(500px) rotateY(-15deg) rotateX(10deg) translateY(0); }
-            50% { transform: perspective(500px) rotateY(-15deg) rotateX(10deg) translateY(-8px); }
-        }
-
-        @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0) rotateX(0deg); }
-            50% { transform: translateY(-15px) rotateX(5deg); }
-        }
-
-        @keyframes pulse3D {
-            0%, 100% { transform: perspective(300px) scale(1) rotateZ(-5deg); }
-            50% { transform: perspective(300px) scale(1.1) rotateZ(-5deg); }
-        }
-
-        @keyframes rotate3D {
-            0% { transform: perspective(1000px) rotateY(0deg); }
-            100% { transform: perspective(1000px) rotateY(360deg); }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 20px var(--glow); }
-            50% { box-shadow: 0 0 40px var(--glow), 0 0 60px var(--glow); }
-        }
-
-        @keyframes bounce3D {
-            0%, 100% { transform: perspective(500px) translateZ(0) translateY(0); }
-            50% { transform: perspective(500px) translateZ(30px) translateY(-10px); }
-        }
-
-        @keyframes tilt3D {
-            0%, 100% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
-            25% { transform: perspective(1000px) rotateX(5deg) rotateY(5deg); }
-            75% { transform: perspective(1000px) rotateX(-5deg) rotateY(-5deg); }
-        }
-
-        @keyframes urgencyMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        /* Trending Ticker Animation */
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        @keyframes tickerReverse {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-
-        .slide-animate {
-            opacity: 0;
-        }
-
-        .slide-animate.visible {
-            animation-duration: 0.8s;
-            animation-fill-mode: forwards;
-            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .slide-left.visible { animation-name: slideInLeft; }
-        .slide-right.visible { animation-name: slideInRight; }
-        .slide-up.visible { animation-name: slideInUp; }
-
-        .float-3d {
-            animation: float3D 3s ease-in-out infinite;
-        }
-
-        .float-updown {
-            animation: floatUpDown 4s ease-in-out infinite;
-        }
-
-        /* ========== HEADER ========== */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: linear-gradient(180deg, #1A1A1A 0%, #0D0D0D 100%);
-            padding: 0.7rem 1rem;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .header-main {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            transform: perspective(500px) rotateY(-5deg);
-            transition: all 0.4s ease;
-            text-shadow: 0 0 20px var(--glow);
-            animation: glowPulse 2s ease-in-out infinite;
-        }
-
-        .logo:hover {
-            transform: perspective(500px) rotateY(0deg) scale(1.1);
-            text-shadow: 0 0 40px var(--amazon-orange);
-        }
-
-        .logo span {
-            color: var(--amazon-orange);
-        }
-
-        .search-bar {
-            flex: 1;
-            max-width: 600px;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-bar select {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.5rem;
-            border-radius: 4px 0 0 4px;
-            font-size: 0.85rem;
-            max-width: 100px;
-            transform: perspective(300px) rotateX(5deg);
-        }
-
-        .search-bar input {
-            flex: 1;
-            padding: 0.5rem;
-            border: 1px solid var(--border);
-            border-left: none;
-            background: var(--surface);
-            color: var(--text);
-            font-size: 0.9rem;
-            transform: perspective(500px);
-            transition: all 0.3s ease;
-        }
-
-        .search-bar input:focus {
-            box-shadow: 0 0 20px var(--glow);
-            transform: perspective(500px) translateZ(5px);
-        }
-
-        .search-bar input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-bar button {
-            background: var(--amazon-orange);
-            border: none;
-            padding: 0.5rem 0.8rem;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            transform: perspective(300px) rotateY(-5deg);
-        }
-
-        .search-bar button:hover {
-            background: var(--amazon-orange-dark);
-            transform: perspective(300px) rotateY(0deg) scale(1.1);
-            box-shadow: 0 5px 20px var(--glow);
-        }
-
-        .header-nav {
-            display: flex;
-            gap: 1.2rem;
-        }
-
-        .header-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-            transform: perspective(300px);
-        }
-
-        .header-nav a:hover {
-            color: var(--amazon-orange);
-            transform: perspective(300px) translateY(-3px) translateZ(10px);
-            text-shadow: 0 0 10px var(--glow);
-        }
-
-        .header-nav a small {
-            display: block;
-            color: #666;
-            font-size: 0.65rem;
-        }
-
-        .cart-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: white;
-            text-decoration: none;
-            font-size: 1.4rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transform: perspective(300px);
-        }
-
-        .cart-btn:hover {
-            transform: perspective(300px) scale(1.15) rotateY(10deg);
-            background: var(--surface);
-            box-shadow: 0 10px 30px var(--glow);
-        }
-
-        .cart-count {
-            background: var(--amazon-orange);
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.1rem 0.4rem;
-            border-radius: 50%;
-        }
-
-        /* ========== CATEGORY BAR ========== */
-        .category-bar {
-            background: var(--bg-secondary);
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .category-bar-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            gap: 1.2rem;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-
-        .category-bar-inner::-webkit-scrollbar { display: none; }
-
-        .category-bar a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            padding: 0.3rem 0.5rem;
-            border-radius: 4px;
-            transform: perspective(200px);
-        }
-
-        .category-bar a:hover {
-            color: var(--amazon-orange);
-            background: var(--surface);
-            transform: perspective(200px) translateY(-3px) rotateX(5deg);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* ========== URGENCY BANNER ========== */
-        .urgency-banner {
-            background: linear-gradient(90deg, var(--amazon-orange), #FFB84D, var(--amazon-orange));
-            background-size: 200% 100%;
-            animation: urgencyMove 3s linear infinite;
-            padding: 0.6rem;
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #000;
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 50%);
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            background: linear-gradient(135deg, var(--amazon-orange), #FFD700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transform: perspective(800px) rotateX(3deg);
-            animation: floatUpDown 3s ease-in-out infinite;
-        }
-
-        .hero-categories {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .hero-category {
-            width: 130px;
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transform: perspective(500px) rotateY(0deg);
-        }
-
-        .hero-category:hover {
-            transform: perspective(500px) rotateY(10deg) rotateX(-5deg) translateY(-15px);
-            border-color: var(--amazon-orange);
-            box-shadow: 0 20px 40px var(--glow);
-        }
-
-        .hero-category-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .hero-category:hover .hero-category-icon {
-            transform: perspective(300px) rotateY(360deg) scale(1.2);
-        }
-
-        .hero-category h3 {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        /* ========== TRENDING TIDINGS SECTION ========== */
-        .tidings-section {
-            background: linear-gradient(135deg, #1A0A00 0%, var(--bg) 50%, #001A0A 100%);
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .section-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .tidings-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .tidings-header h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #FFD700, var(--amazon-orange), #FF6B6B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tidings-header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Trending Ticker */
-        .trending-ticker-container {
-            position: relative;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-            padding: 1rem 0;
-        }
-
-        .trending-ticker-container::before,
-        .trending-ticker-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100px;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .trending-ticker-container::before {
-            left: 0;
-            background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
-        }
-
-        .trending-ticker-container::after {
-            right: 0;
-            background: linear-gradient(-90deg, var(--bg) 0%, transparent 100%);
-        }
-
-        .trending-ticker-label {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--amazon-orange);
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            z-index: 20;
-            animation: pulse3D 2s ease-in-out infinite;
-            box-shadow: 0 5px 20px var(--glow);
-        }
-
-        .trending-track {
-            display: flex;
-            gap: 1rem;
-            animation: ticker 40s linear infinite;
-            padding-left: 120px;
-        }
-
-        .trending-track:hover {
-            animation-play-state: paused;
-        }
-
-        .trending-item {
-            min-width: 200px;
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 0.8rem;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            transform: perspective(500px) rotateY(0deg);
-        }
-
-        .trending-item:hover {
-            transform: perspective(500px) rotateY(10deg) scale(1.05) translateY(-10px);
-            border-color: var(--amazon-orange);
-            box-shadow: 0 15px 35px var(--glow);
-        }
-
-        .trending-item img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            transform: perspective(300px) rotateX(5deg);
-            transition: all 0.3s ease;
-        }
-
-        .trending-item:hover img {
-            transform: perspective(300px) rotateX(0deg) scale(1.05);
-        }
-
-        .trending-item-name {
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .trending-item-price {
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-        }
-
-        .trending-item-price .original {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-decoration: line-through;
-        }
-
-        .trending-item-price .sale {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--amazon-orange);
-        }
-
-        .trending-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #FF6B6B, #FF4757);
-            color: white;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        /* Tidings Scroll */
-        .tidings-scroll {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            padding: 1rem 0;
-            scrollbar-width: none;
-        }
-
-        .tidings-scroll::-webkit-scrollbar { display: none; }
-
-        .tiding-card {
-            min-width: 250px;
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transform: perspective(500px);
-        }
-
-        .tiding-card:hover {
-            transform: perspective(500px) rotateY(5deg) translateY(-15px) scale(1.02);
-            border-color: var(--amazon-orange);
-            box-shadow: 0 25px 50px var(--glow);
-        }
-
-        .tiding-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #FF6B6B, #FF4757);
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .tiding-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-            transform: perspective(300px);
-            transition: all 0.3s ease;
-        }
-
-        .tiding-card:hover img {
-            transform: perspective(300px) rotateY(5deg) scale(1.05);
-        }
-
-        .tiding-card h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .tiding-price {
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-        }
-
-        .tiding-price .original {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-decoration: line-through;
-        }
-
-        .tiding-price .sale {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--amazon-orange);
-        }
-
-        /* ========== PRODUCT SECTIONS ========== */
-        .product-section {
-            padding: 2rem 1rem;
-            background: var(--bg);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-number {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--amazon-orange), var(--amazon-orange-dark));
-            color: #000;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1rem;
-            animation: float3D 3s ease-in-out infinite;
-            box-shadow: 0 4px 15px var(--glow);
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .section-link {
-            color: var(--amazon-orange);
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin-left: auto;
-            transition: all 0.3s ease;
-        }
-
-        .section-link:hover {
-            transform: translateX(5px);
-            text-shadow: 0 0 10px var(--glow);
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .product-card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transform: perspective(500px);
-        }
-
-        .product-card:hover {
-            transform: perspective(500px) translateY(-12px) rotateX(5deg);
-            border-color: var(--amazon-orange);
-            box-shadow: 0 25px 50px var(--glow);
-        }
-
-        .product-image-container {
-            position: relative;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 1rem;
-            min-height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.8rem;
-            transform: perspective(500px) rotateY(0deg);
-            transition: all 0.4s ease;
-        }
-
-        .product-card:hover .product-image-container {
-            transform: perspective(500px) rotateY(5deg) scale(1.02);
-        }
-
-        .product-image {
-            max-width: 100%;
-            max-height: 130px;
-            object-fit: contain;
-            transform: perspective(300px);
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover .product-image {
-            transform: perspective(300px) scale(1.1) rotateY(-5deg);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: #CC0C39;
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            animation: pulse3D 2s ease-in-out infinite;
-        }
-
-        .product-name {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .product-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .stars {
-            color: #FFA41C;
-            font-size: 0.85rem;
-        }
-
-        .rating-count {
-            color: var(--amazon-orange);
-            font-size: 0.8rem;
-        }
-
-        .price-container {
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .original-price {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-decoration: line-through;
-        }
-
-        .sale-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--amazon-orange);
-        }
-
-        .sale-price sup {
-            font-size: 0.7rem;
-        }
-
-        .shipping-badge {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .shipping-badge span {
-            color: var(--success);
-            font-weight: 500;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background: linear-gradient(180deg, #FFD814 0%, #FFBC0B 100%);
-            border: 1px solid #CD942D;
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #000;
-            transform: perspective(200px) translateZ(0);
-        }
-
-        .add-to-cart:hover {
-            transform: perspective(200px) translateZ(10px) scale(1.05);
-            box-shadow: 0 8px 25px var(--glow);
-        }
-
-        /* Featured Card */
-        .featured-card {
-            background: linear-gradient(135deg, var(--surface), var(--bg-secondary));
-            border: 2px solid var(--amazon-orange);
-            border-radius: 16px;
-            padding: 1.5rem;
-            display: grid;
-            grid-template-columns: 0.6fr 1fr;
-            gap: 2rem;
-            align-items: center;
-            box-shadow: 0 10px 40px var(--glow);
-            transform: perspective(1000px);
-            transition: all 0.4s ease;
-        }
-
-        .featured-card:hover {
-            transform: perspective(1000px) translateZ(20px) rotateX(-2deg);
-            box-shadow: 0 30px 70px var(--glow);
-        }
-
-        .featured-card .product-image-container {
-            min-height: 250px;
-        }
-
-        .featured-card .product-name {
-            font-size: 1.1rem;
-        }
-
-        .featured-card .sale-price {
-            font-size: 1.8rem;
-        }
-
-        /* Three Column */
-        .three-col-section {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .col-card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            transform: perspective(500px);
-        }
-
-        .col-card:hover {
-            transform: perspective(500px) rotateY(3deg) translateY(-10px);
-            border-color: var(--amazon-orange);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .col-card h3 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
-            color: var(--amazon-orange);
-        }
-
-        .col-card-item {
-            display: flex;
-            gap: 0.8rem;
-            margin-bottom: 0.8rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            transform: perspective(300px);
-        }
-
-        .col-card-item:hover {
-            background: var(--bg-secondary);
-            transform: perspective(300px) translateX(5px);
-        }
-
-        .col-card-item img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 6px;
-            transform: perspective(200px) rotateY(0deg);
-            transition: all 0.3s ease;
-        }
-
-        .col-card-item:hover img {
-            transform: perspective(200px) rotateY(10deg) scale(1.05);
-        }
-
-        .col-card-item-info h4 {
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-        }
-
-        .col-card-item-info .price {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--amazon-orange);
-        }
-
-        .col-card-item-info .price span {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            margin-left: 0.3rem;
-        }
-
-        /* Banner */
-        .banner-section {
-            background: linear-gradient(135deg, #1A1A1A 0%, #2A0A00 50%, #1A1A1A 100%);
-            padding: 2rem 1rem;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .banner-card {
-            background: linear-gradient(135deg, #FF9900, #FF6600);
-            border-radius: 16px;
-            padding: 2rem;
-            color: #000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 40px var(--glow);
-            transform: perspective(1000px) rotateY(0deg);
-            transition: all 0.4s ease;
-        }
-
-        .banner-card:hover {
-            transform: perspective(1000px) rotateY(2deg) translateZ(20px);
-            box-shadow: 0 20px 60px var(--glow);
-        }
-
-        .banner-content h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .banner-content p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .banner-btn {
-            background: #000;
-            color: var(--amazon-orange);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            transform: perspective(300px);
-        }
-
-        .banner-btn:hover {
-            transform: perspective(300px) scale(1.1) translateZ(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* ========== FOOTER ========== */
-        footer {
-            background: var(--bg-secondary);
-            color: white;
-            padding: 2rem 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-top {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .footer-col h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--amazon-orange);
-        }
-
-        .footer-col a {
-            display: block;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-            transform: perspective(200px);
-        }
-
-        .footer-col a:hover {
-            color: var(--amazon-orange);
-            transform: perspective(200px) translateX(5px);
-            text-shadow: 0 0 10px var(--glow);
-        }
-
-        .footer-divider {
-            max-width: 1400px;
-            margin: 2rem auto;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .footer-logo span {
-            color: var(--amazon-orange);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.7rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--amazon-orange);
-        }
-
-        .copyright {
-            color: #666;
-            font-size: 0.7rem;
-        }
-
-        /* ========== MODALS ========== */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            max-width: 100vw;
-            height: 100vh;
-            background: var(--bg-secondary);
-            z-index: 2000;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid var(--border);
-            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
-        }
-
-        .cart-modal.open { right: 0; }
-
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cart-overlay.open { opacity: 1; visibility: visible; }
-
-        .cart-header {
-            padding: 1rem;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-header h2 { font-size: 1.2rem; font-weight: 700; }
-
-        .close-cart {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
-        }
-
-        .close-cart:hover {
-            color: var(--amazon-orange);
-            transform: rotate(90deg);
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .cart-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            background: var(--surface);
-            border-radius: 8px;
-        }
-
-        .cart-item-info { flex: 1; }
-        .cart-item-info h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
-        .cart-item-info .price { font-size: 1.1rem; font-weight: 700; color: var(--amazon-orange); }
-
-        .cart-item-qty {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .qty-btn {
-            width: 28px;
-            height: 28px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .qty-btn:hover {
-            border-color: var(--amazon-orange);
-            transform: scale(1.1);
-        }
-
-        .remove-item {
-            background: none;
-            border: none;
-            color: var(--amazon-orange);
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .cart-empty {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .cart-empty-icon { font-size: 4rem; margin-bottom: 1rem; }
-
-        .cart-footer {
-            padding: 1rem;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-        }
-
-        .cart-subtotal {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .cart-subtotal span:last-child { font-weight: 700; color: var(--amazon-orange); }
-
-        .checkout-btn {
-            width: 100%;
-            background: var(--amazon-orange);
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #000;
-        }
-
-        .checkout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px var(--glow);
-        }
-
-        .checkout-modal, .success-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .checkout-modal.open, .success-modal.open { display: flex; }
-
-        .checkout-container {
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-        }
-
-        .checkout-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .checkout-header h2 { font-size: 1.4rem; font-weight: 700; }
-
-        .close-checkout {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-
-        .checkout-body {
-            padding: 1.5rem;
-            display: grid;
-            grid-template-columns: 1fr 0.8fr;
-            gap: 2rem;
-        }
-
-        .checkout-form h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--amazon-orange);
-        }
-
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.3rem; font-size: 0.85rem; font-weight: 600; }
-        .form-group input {
-            width: 100%;
-            padding: 0.7rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: var(--surface);
-            color: var(--text);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: 2px solid var(--amazon-orange);
-            transform: translateZ(5px);
-            box-shadow: 0 0 15px var(--glow);
-        }
-
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-        .payment-option {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--surface);
-            transform: perspective(300px);
-        }
-
-        .payment-option:hover {
-            border-color: var(--amazon-orange);
-            transform: perspective(300px) translateZ(5px);
-        }
-
-        .payment-option.selected {
-            border-color: var(--amazon-orange);
-            background: rgba(255, 153, 0, 0.1);
-        }
-
-        .payment-icon { font-size: 1.5rem; }
-        .payment-info h4 { font-size: 0.9rem; font-weight: 600; }
-        .payment-info p { font-size: 0.8rem; color: var(--text-muted); }
-
-        .order-summary {
-            background: var(--surface);
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-
-        .order-summary h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
-            color: var(--amazon-orange);
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            font-size: 0.85rem;
-        }
-
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .summary-total span:last-child { color: var(--amazon-orange); }
-
-        .process-payment {
-            width: 100%;
-            background: var(--amazon-orange);
-            border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 1.5rem;
-            transition: all 0.2s ease;
-            color: #000;
-        }
-
-        .process-payment:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px var(--glow);
-        }
-
-        .secure-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .bank-details {
-            display: none;
-            background: var(--surface);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-
-        .bank-details.show { display: block; }
-        .bank-info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.85rem;
-        }
-
-        .copy-btn {
-            background: var(--amazon-orange);
-            border: none;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            color: #000;
-        }
-
-        .success-content {
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            padding: 3rem;
-            text-align: center;
-            max-width: 450px;
-            border: 2px solid var(--success);
-        }
-
-        .success-icon { font-size: 5rem; margin-bottom: 1rem; }
-        .success-content h2 { font-size: 1.4rem; font-weight: 700; color: var(--success); margin-bottom: 0.5rem; }
-        .success-content p { color: var(--text-muted); margin-bottom: 1.5rem; }
-
-        .order-id {
-            background: var(--surface);
-            padding: 1rem;
-            border-radius: 8px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--amazon-orange);
-        }
-
-        .success-btn {
-            background: var(--amazon-orange);
-            color: #000;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .success-btn:hover { transform: scale(1.05); }
-
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--amazon-orange);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            border: none;
-            color: #000;
-            transform: perspective(300px);
-        }
-
-        .scroll-top.visible { opacity: 1; visibility: visible; }
-
-        .scroll-top:hover {
-            transform: perspective(300px) scale(1.2) translateZ(20px);
-            box-shadow: 0 10px 30px var(--glow);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .footer-top { grid-template-columns: repeat(2, 1fr); }
-            .checkout-body { grid-template-columns: 1fr; }
-            .featured-card { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .header-nav { display: none; }
-            .three-col-section { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; }
-            .banner-card { flex-direction: column; text-align: center; gap: 1rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUSDigital — Premier Digital Products & Tools Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --card-bg: #12151c;
+      --card-hover: #191e28;
+      --accent-orange: #f59e0b;
+      --accent-hover: #d97706;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: #262b36;
+      --badge-red: #ef4444;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAV */
+    header {
+      background: #0f1218;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent-orange);
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 550px;
+      display: flex;
+      background: #1a1e27;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .search-category {
+      background: #242936;
+      color: var(--text-muted);
+      border: none;
+      padding: 0 12px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-btn {
+      background: var(--accent-orange);
+      border: none;
+      padding: 0 18px;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .search-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      transition: color 0.2s;
+    }
+
+    .nav-link span:first-child {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .cart-btn {
+      background: #1e2430;
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .cart-badge {
+      background: var(--accent-orange);
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+
+    /* CATEGORY FILTER BAR */
+    .filter-bar {
+      background: #11141b;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .filter-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .filter-tab {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-tab:hover {
+      color: #fff;
+      background: #1a1f2b;
+    }
+
+    .filter-tab.active {
+      background: var(--accent-orange);
+      color: #000;
+      border-color: var(--accent-orange);
+    }
+
+    /* MAIN CONTENT */
+    .main-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 40px 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-number {
+      background: var(--accent-orange);
+      color: #000;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .see-more {
+      color: var(--accent-orange);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* PRODUCT CARD */
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-orange);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--badge-red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: #181d26;
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .card-img {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-category {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .rating {
+      color: #fbbf24;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .rating span {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+
+    .old-price {
+      color: #6b7280;
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    .current-price {
+      color: var(--accent-orange);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .delivery-info {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .delivery-info span {
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    .add-btn {
+      background: var(--accent-orange);
+      color: #000;
+      border: none;
+      padding: 11px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .add-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* CART MODAL / DRAWER */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 380px;
+      height: 100%;
+      background: #11141c;
+      border-left: 1px solid var(--border-color);
+      z-index: 200;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #181c25;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .checkout-btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .checkout-btn:hover {
+      background: #059669;
+    }
+
+    .backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 150;
+      display: none;
+    }
+
+    .backdrop.open {
+      display: block;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #10b981;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 300;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .search-bar { display: none; }
+      .nav-link { display: none; }
+      .cart-drawer { width: 100%; right: -100%; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-main">
-            <a href="#" class="logo">NEXUS<span>Digital</span></a>
-            <div class="search-bar">
-                <select>
-                    <option>All</option>
-                    <option>Digital Products</option>
-                    <option>Marketing Tools</option>
-                    <option>Software</option>
-                    <option>Templates</option>
-                </select>
-                <input type="text" placeholder="Search products, tools, templates...">
-                <button>🔍</button>
-            </div>
-            <div class="header-nav">
-                <a href="#">Hello, Sign in<small>Account & Lists</small></a>
-                <a href="#">Training<small>Courses & Certs</small></a>
-                <a href="#">Orders<small>& Returns</small></a>
-            </div>
-            <a href="#" class="cart-btn" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></a>
-        </div>
-    </header>
 
-    <!-- Category Bar -->
-    <div class="category-bar">
-        <div class="category-bar-inner">
-            <a href="#">🔥 Today's Deals</a>
-            <a href="#">📦 Digital Products</a>
-            <a href="#">🎨 Design Tools</a>
-            <a href="#">📊 Marketing Suite</a>
-            <a href="#">🎓 Training</a>
-            <a href="#">🤖 AI Tools</a>
-            <a href="#">📝 Templates</a>
-            <a href="#">📚 Courses</a>
-            <a href="#">💼 Business Tools</a>
-            <a href="#">⚡ Software</a>
-            <a href="#">🎯 SEO Tools</a>
-            <a href="#">📧 Email Marketing</a>
-            <a href="#">🎬 Video Tools</a>
-        </div>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">NEXUS<span>Digital</span></a>
+
+      <div class="search-bar">
+        <select class="search-category" id="searchCat">
+          <option value="all">All</option>
+          <option value="video">Video Editing</option>
+          <option value="ai">AI Tools</option>
+          <option value="courses">Courses</option>
+          <option value="design">Design</option>
+          <option value="marketing">Marketing</option>
+        </select>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search products, video assets, tools, templates..." />
+        <button class="search-btn" onclick="applySearch()">Search</button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#courses-section" class="nav-link">
+          <span>Training</span>
+          <strong>Courses & Certs</strong>
+        </a>
+        <a href="#orders" class="nav-link">
+          <span>Orders</span>
+          <strong>& Returns</strong>
+        </a>
+        <button class="cart-btn" onclick="toggleCart()">
+          🛒 Cart
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <!-- Urgency Banner -->
-    <div class="urgency-banner">
-        ⚡ MEGA SALE — Up to 85% OFF on All Digital Products | FREE Shipping | 🔥 Trending Tidings Available Now!
+  <!-- CATEGORY FILTER TABS -->
+  <nav class="filter-bar">
+    <div class="filter-container">
+      <button class="filter-tab active" onclick="filterCategory('all', this)">⚡ All Products</button>
+      <button class="filter-tab" onclick="filterCategory('video', this)">🎬 Video Editing & VFX</button>
+      <button class="filter-tab" onclick="filterCategory('ai', this)">🤖 AI & Automation Tools</button>
+      <button class="filter-tab" onclick="filterCategory('courses', this)">🎓 Training & Courses</button>
+      <button class="filter-tab" onclick="filterCategory('design', this)">🎨 Design Bundles</button>
+      <button class="filter-tab" onclick="filterCategory('marketing', this)">🚀 Marketing & SEO</button>
     </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="section-container">
-            <h1>🚀 Premium Digital Marketing Tools</h1>
-            <p style="color: var(--text-muted);">Transform your business with professional-grade marketing tools</p>
-            <div class="hero-categories">
-                <div class="hero-category">
-                    <div class="hero-category-icon">📊</div>
-                    <h3>Marketing Suite</h3>
-                </div>
-                <div class="hero-category">
-                    <div class="hero-category-icon">🤖</div>
-                    <h3>AI Tools</h3>
-                </div>
-                <div class="hero-category">
-                    <div class="hero-category-icon">🎨</div>
-                    <h3>Design Kits</h3>
-                </div>
-                <div class="hero-category">
-                    <div class="hero-category-icon">🎓</div>
-                    <h3>Training</h3>
-                </div>
-                <div class="hero-category">
-                    <div class="hero-category-icon">📧</div>
-                    <h3>Email Tools</h3>
-                </div>
-            </div>
+  <!-- MAIN BODY -->
+  <main class="main-container">
+
+    <!-- 01: VIDEO EDITING & VFX (NEW DEDICATED SECTION) -->
+    <section class="category-block" id="video-section" data-category="video">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-number">01</span>
+          <h2 class="section-title">🎬 Video Editing & VFX Assets</h2>
         </div>
+        <a href="#video-section" class="see-more">View All Assets →</a>
+      </div>
+
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card" data-title="Cinematic LUTs & Color Grading Master Pack">
+          <span class="card-badge">-85%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600" alt="LUTs Pack" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">Video Editing</span>
+            <h3 class="card-title">Cinematic LUTs & Color Grade Pro Pack (500+ Presets)</h3>
+            <div class="rating">★★★★★ <span>(1,940)</span></div>
+            <div class="price-row">
+              <span class="old-price">$299</span>
+              <span class="current-price">$49</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Cinematic LUTs Master Pack', 49)">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-title="Premiere Pro Transitions & Sound FX Suite">
+          <span class="card-badge">-80%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600" alt="Premiere Pack" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">Premiere Pro</span>
+            <h3 class="card-title">Motion FX & Cinematic Sound Library (2,500+ Assets)</h3>
+            <div class="rating">★★★★★ <span>(2,810)</span></div>
+            <div class="price-row">
+              <span class="old-price">$399</span>
+              <span class="current-price">$79</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Motion FX Sound Library', 79)">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card" data-title="After Effects Viral Reels & Shorts Template Kit">
+          <span class="card-badge">-90%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?w=600" alt="AE Templates" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">Templates</span>
+            <h3 class="card-title">Viral Reels & TikTok Editing Templates (AE & CapCut)</h3>
+            <div class="rating">★★★★★ <span>(4,120)</span></div>
+            <div class="price-row">
+              <span class="old-price">$499</span>
+              <span class="current-price">$59</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Viral Reels Editing Templates', 59)">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card" data-title="AI 3D Motion & Title Animations">
+          <span class="card-badge">-82%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" alt="3D Motion" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">VFX & Titles</span>
+            <h3 class="card-title">3D Kinetic Typography & Motion Title Suite</h3>
+            <div class="rating">★★★★★ <span>(840)</span></div>
+            <div class="price-row">
+              <span class="old-price">$249</span>
+              <span class="current-price">$39</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('3D Kinetic Typography Suite', 39)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Trending Tidings Section -->
-    <section class="tidings-section">
-        <div class="section-container">
-            <div class="tidings-header slide-animate slide-up">
-                <h2>🎊 Trending Tidings - Limited Time Offers!</h2>
-                <p>Don't miss these exclusive seasonal deals - ends soon!</p>
-            </div>
-
-            <!-- Trending Ticker -->
-            <div class="trending-ticker-container">
-                <div class="trending-ticker-label">🔥 TRENDING</div>
-                <div class="trending-track">
-                    <!-- First set -->
-                    <div class="trending-item" onclick="addToCart(101, 'AI Content Generator', 179, 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&q=80" alt="AI">
-                        <div class="trending-badge">HOT</div>
-                        <div class="trending-item-name">AI Content Generator Pro</div>
-                        <div class="trending-item-price">
-                            <span class="original">$897</span>
-                            <span class="sale">$179</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(102, 'SEO Supercharger', 229, 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80" alt="SEO">
-                        <div class="trending-badge">SALE</div>
-                        <div class="trending-item-name">SEO Supercharger Toolkit</div>
-                        <div class="trending-item-price">
-                            <span class="original">$749</span>
-                            <span class="sale">$229</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(103, 'Email Marketing Beast', 129, 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80" alt="Email">
-                        <div class="trending-badge">BEST</div>
-                        <div class="trending-item-name">Email Marketing Beast</div>
-                        <div class="trending-item-price">
-                            <span class="original">$599</span>
-                            <span class="sale">$129</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(104, 'Design Bundle', 199, 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80" alt="Design">
-                        <div class="trending-badge">NEW</div>
-                        <div class="trending-item-name">Design Everything Bundle</div>
-                        <div class="trending-item-price">
-                            <span class="original">$1,299</span>
-                            <span class="sale">$199</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(105, 'Social Media Command', 179, 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Social">
-                        <div class="trending-badge">TOP</div>
-                        <div class="trending-item-name">Social Media Command</div>
-                        <div class="trending-item-price">
-                            <span class="original">$499</span>
-                            <span class="sale">$179</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(106, 'Video Masterkit', 159, 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80" alt="Video">
-                        <div class="trending-badge">HOT</div>
-                        <div class="trending-item-name">Video Marketing Masterkit</div>
-                        <div class="trending-item-price">
-                            <span class="original">$899</span>
-                            <span class="sale">$159</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(107, 'Analytics Pro', 219, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80" alt="Analytics">
-                        <div class="trending-badge">SALE</div>
-                        <div class="trending-item-name">Analytics Dashboard Pro</div>
-                        <div class="trending-item-price">
-                            <span class="original">$799</span>
-                            <span class="sale">$219</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(108, 'Chatbot Builder', 189, 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=300&q=80" alt="Chatbot">
-                        <div class="trending-badge">NEW</div>
-                        <div class="trending-item-name">AI Chatbot Builder Pro</div>
-                        <div class="trending-item-price">
-                            <span class="original">$799</span>
-                            <span class="sale">$189</span>
-                        </div>
-                    </div>
-                    <!-- Duplicate for seamless loop -->
-                    <div class="trending-item" onclick="addToCart(101, 'AI Content Generator', 179, 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&q=80" alt="AI">
-                        <div class="trending-badge">HOT</div>
-                        <div class="trending-item-name">AI Content Generator Pro</div>
-                        <div class="trending-item-price">
-                            <span class="original">$897</span>
-                            <span class="sale">$179</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(102, 'SEO Supercharger', 229, 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80" alt="SEO">
-                        <div class="trending-badge">SALE</div>
-                        <div class="trending-item-name">SEO Supercharger Toolkit</div>
-                        <div class="trending-item-price">
-                            <span class="original">$749</span>
-                            <span class="sale">$229</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(103, 'Email Marketing Beast', 129, 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80" alt="Email">
-                        <div class="trending-badge">BEST</div>
-                        <div class="trending-item-name">Email Marketing Beast</div>
-                        <div class="trending-item-price">
-                            <span class="original">$599</span>
-                            <span class="sale">$129</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(104, 'Design Bundle', 199, 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80" alt="Design">
-                        <div class="trending-badge">NEW</div>
-                        <div class="trending-item-name">Design Everything Bundle</div>
-                        <div class="trending-item-price">
-                            <span class="original">$1,299</span>
-                            <span class="sale">$199</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(105, 'Social Media Command', 179, 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Social">
-                        <div class="trending-badge">TOP</div>
-                        <div class="trending-item-name">Social Media Command</div>
-                        <div class="trending-item-price">
-                            <span class="original">$499</span>
-                            <span class="sale">$179</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(106, 'Video Masterkit', 159, 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80" alt="Video">
-                        <div class="trending-badge">HOT</div>
-                        <div class="trending-item-name">Video Marketing Masterkit</div>
-                        <div class="trending-item-price">
-                            <span class="original">$899</span>
-                            <span class="sale">$159</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(107, 'Analytics Pro', 219, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80" alt="Analytics">
-                        <div class="trending-badge">SALE</div>
-                        <div class="trending-item-name">Analytics Dashboard Pro</div>
-                        <div class="trending-item-price">
-                            <span class="original">$799</span>
-                            <span class="sale">$219</span>
-                        </div>
-                    </div>
-                    <div class="trending-item" onclick="addToCart(108, 'Chatbot Builder', 189, 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=300&q=80')">
-                        <img src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=300&q=80" alt="Chatbot">
-                        <div class="trending-badge">NEW</div>
-                        <div class="trending-item-name">AI Chatbot Builder Pro</div>
-                        <div class="trending-item-price">
-                            <span class="original">$799</span>
-                            <span class="sale">$189</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tidings Cards -->
-            <div class="tidings-scroll">
-                <div class="tiding-card" onclick="addToCart(201, 'Ultimate Bundle', 997, 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=300&q=80')">
-                    <span class="tiding-badge">🎄 HOLIDAY SPECIAL</span>
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=300&q=80" alt="Bundle">
-                    <h4>🎁 Ultimate Holiday Bundle</h4>
-                    <div class="tiding-price">
-                        <span class="original">$4,999</span>
-                        <span class="sale">$997</span>
-                    </div>
-                </div>
-                <div class="tiding-card" onclick="addToCart(202, 'Flash Sale Pack', 299, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80')">
-                    <span class="tiding-badge">⚡ FLASH SALE</span>
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80" alt="Analytics">
-                    <h4>⚡ Flash Sale - 90% OFF</h4>
-                    <div class="tiding-price">
-                        <span class="original">$2,999</span>
-                        <span class="sale">$299</span>
-                    </div>
-                </div>
-                <div class="tiding-card" onclick="addToCart(203, 'AI Gift Pack', 349, 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&q=80')">
-                    <span class="tiding-badge">🎁 BEST GIFT</span>
-                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&q=80" alt="AI">
-                    <h4>🎁 AI Tools Gift Pack</h4>
-                    <div class="tiding-price">
-                        <span class="original">$1,897</span>
-                        <span class="sale">$349</span>
-                    </div>
-                </div>
-                <div class="tiding-card" onclick="addToCart(204, 'SEO Pro', 179, 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80')">
-                    <span class="tiding-badge">🔥 HOT DEAL</span>
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80" alt="SEO">
-                    <h4>🔥 SEO Supercharger Pro</h4>
-                    <div class="tiding-price">
-                        <span class="original">$1,299</span>
-                        <span class="sale">$179</span>
-                    </div>
-                </div>
-                <div class="tiding-card" onclick="addToCart(205, 'Design Master', 199, 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80')">
-                    <span class="tiding-badge">✨ NEW YEAR</span>
-                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80" alt="Design">
-                    <h4>✨ Design Masterclass</h4>
-                    <div class="tiding-price">
-                        <span class="original">$999</span>
-                        <span class="sale">$199</span>
-                    </div>
-                </div>
-                <div class="tiding-card" onclick="addToCart(206, 'Email Pro', 99, 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80')">
-                    <span class="tiding-badge">💰 SAVE BIG</span>
-                    <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80" alt="Email">
-                    <h4>💰 Email Marketing Pro</h4>
-                    <div class="tiding-price">
-                        <span class="original">$899</span>
-                        <span class="sale">$99</span>
-                    </div>
-                </div>
-            </div>
+    <!-- 02: AI & AUTOMATION TOOLS -->
+    <section class="category-block" id="ai-section" data-category="ai">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-number">02</span>
+          <h2 class="section-title">🤖 AI & Automation Tools</h2>
         </div>
+        <a href="#ai-section" class="see-more">View All AI Tools →</a>
+      </div>
+
+      <div class="product-grid">
+        <div class="product-card" data-title="AI Content Generator Pro">
+          <span class="card-badge">-78%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600" alt="AI Generator" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">AI Automation</span>
+            <h3 class="card-title">AI Content Generator Pro — Unlimited Copy Engine</h3>
+            <div class="rating">★★★★★ <span>(3,450)</span></div>
+            <div class="price-row">
+              <span class="old-price">$897</span>
+              <span class="current-price">$179</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('AI Content Generator Pro', 179)">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-title="AI Chatbot Builder Pro">
+          <span class="card-badge">-75%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?w=600" alt="Chatbot" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">AI Chatbots</span>
+            <h3 class="card-title">AI Chatbot Builder Pro — No-Code Customer Bot</h3>
+            <div class="rating">★★★★★ <span>(2,190)</span></div>
+            <div class="price-row">
+              <span class="old-price">$799</span>
+              <span class="current-price">$189</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('AI Chatbot Builder Pro', 189)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="product-section" id="products">
-        <div class="section-container">
-            
-            <!-- Section 1: Featured -->
-            <div class="section-header slide-animate slide-left">
-                <div class="section-number">01</div>
-                <h2 class="section-title">🔥 Top Marketing Tools</h2>
-                <a href="#" class="section-link">See more →</a>
-            </div>
-            <div class="featured-card slide-animate slide-up" onclick="addToCart(1, 'Pro Marketing Suite', 249, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80')">
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80" alt="Marketing Suite" class="product-image">
-                    <span class="discount-badge">-75% OFF</span>
-                </div>
-                <div>
-                    <h3 class="product-name" style="font-size: 1.2rem; margin-bottom: 0.5rem;">🚀 Pro Marketing Suite - Complete Automation Platform</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(2,847)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$999</span>
-                        <span class="sale-price"><sup>$</sup>249</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span> by Digital Download</p>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.8rem 0;">Complete marketing automation with AI-powered analytics, email campaigns, and social media management.</p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(1, 'Pro Marketing Suite', 249, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80')">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Section 2: Training Courses -->
-            <div class="section-header slide-animate slide-right" style="margin-top: 2rem;">
-                <div class="section-number">02</div>
-                <h2 class="section-title">🎓 Training & Courses</h2>
-                <a href="#" class="section-link">View all courses →</a>
-            </div>
-            <div class="product-grid">
-                <div class="product-card slide-animate slide-left" onclick="addToCart(10, 'Digital Marketing Mastery', 149, 'https://images.unsplash.com/photo-1516321165247-4aa89a48be55?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be55?w=300&q=80" alt="Course" class="product-image">
-                        <span class="discount-badge">-80%</span>
-                    </div>
-                    <h3 class="product-name">📚 Digital Marketing Mastery Course</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(3,421)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$697</span>
-                        <span class="sale-price"><sup>$</sup>149</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(10, 'Digital Marketing Mastery', 149, 'https://images.unsplash.com/photo-1516321165247-4aa89a48be55?w=300&q=80')">Add to Cart</button>
-                </div>
-
-                <div class="product-card slide-animate slide-left" style="animation-delay: 0.1s;" onclick="addToCart(11, 'SEO Certification', 129, 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80" alt="SEO" class="product-image">
-                        <span class="discount-badge">-85%</span>
-                    </div>
-                    <h3 class="product-name">🎯 SEO Certification Program</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(2,876)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$899</span>
-                        <span class="sale-price"><sup>$</sup>129</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(11, 'SEO Certification', 129, 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80')">Add to Cart</button>
-                </div>
-
-                <div class="product-card slide-animate slide-left" style="animation-delay: 0.2s;" onclick="addToCart(12, 'Social Media Academy', 99, 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Social" class="product-image">
-                        <span class="discount-badge">-83%</span>
-                    </div>
-                    <h3 class="product-name">📱 Social Media Marketing Academy</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-count">(1,543)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$599</span>
-                        <span class="sale-price"><sup>$</sup>99</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(12, 'Social Media Academy', 99, 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80')">Add to Cart</button>
-                </div>
-
-                <div class="product-card slide-animate slide-left" style="animation-delay: 0.3s;" onclick="addToCart(13, 'Content Writing Course', 79, 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=80" alt="Writing" class="product-image">
-                        <span class="discount-badge">-87%</span>
-                    </div>
-                    <h3 class="product-name">✍️ Content Writing Masterclass</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(4,231)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$599</span>
-                        <span class="sale-price"><sup>$</sup>79</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(13, 'Content Writing Course', 79, 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=80')">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Section 3: Best Sellers -->
-            <div class="section-header slide-animate slide-right" style="margin-top: 2rem;">
-                <div class="section-number">03</div>
-                <h2 class="section-title">🎯 Best Sellers</h2>
-                <a href="#" class="section-link">Shop all →</a>
-            </div>
-            <div class="three-col-section">
-                <div class="col-card slide-animate slide-left">
-                    <h3>🤖 AI Tools</h3>
-                    <div class="col-card-item" onclick="addToCart(14, 'AI Content Generator', 179, 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&q=80')">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&q=80" alt="AI">
-                        <div class="col-card-item-info">
-                            <h4>AI Content Generator Pro</h4>
-                            <div class="price"><sup>$</sup>179 <span>$897</span></div>
-                        </div>
-                    </div>
-                    <div class="col-card-item" onclick="addToCart(15, 'AI Chatbot Builder', 189, 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=200&q=80')">
-                        <img src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=200&q=80" alt="Chatbot">
-                        <div class="col-card-item-info">
-                            <h4>AI Chatbot Builder Pro</h4>
-                            <div class="price"><sup>$</sup>189 <span>$799</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-card slide-animate slide-up">
-                    <h3>🎨 Design Bundles</h3>
-                    <div class="col-card-item" onclick="addToCart(16, 'Design Everything Bundle', 199, 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&q=80')">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&q=80" alt="Design">
-                        <div class="col-card-item-info">
-                            <h4>Design Everything Bundle</h4>
-                            <div class="price"><sup>$</sup>199 <span>$1,299</span></div>
-                        </div>
-                    </div>
-                    <div class="col-card-item" onclick="addToCart(17, 'Brand Identity Kit', 199, 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&q=80')">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&q=80" alt="Brand">
-                        <div class="col-card-item-info">
-                            <h4>Complete Brand Identity Kit</h4>
-                            <div class="price"><sup>$</sup>199 <span>$1,199</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-card slide-animate slide-right">
-                    <h3>📊 Analytics & SEO</h3>
-                    <div class="col-card-item" onclick="addToCart(18, 'SEO Supercharger', 229, 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&q=80')">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&q=80" alt="SEO">
-                        <div class="col-card-item-info">
-                            <h4>SEO Supercharger Toolkit</h4>
-                            <div class="price"><sup>$</sup>229 <span>$749</span></div>
-                        </div>
-                    </div>
-                    <div class="col-card-item" onclick="addToCart(19, 'Analytics Dashboard', 219, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&q=80')">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&q=80" alt="Analytics">
-                        <div class="col-card-item-info">
-                            <h4>Analytics Dashboard Pro</h4>
-                            <div class="price"><sup>$</sup>219 <span>$799</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 4: Email & Social -->
-            <div class="section-header slide-animate slide-left" style="margin-top: 2rem;">
-                <div class="section-number">04</div>
-                <h2 class="section-title">📧 Email & Social Media Tools</h2>
-            </div>
-            <div class="product-grid">
-                <div class="product-card slide-animate slide-up" onclick="addToCart(20, 'Email Marketing Beast', 129, 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80" alt="Email" class="product-image">
-                        <span class="discount-badge">-78%</span>
-                    </div>
-                    <h3 class="product-name">📧 Email Marketing Beast - 500+ Templates</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(1,523)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$599</span>
-                        <span class="sale-price"><sup>$</sup>129</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(20, 'Email Marketing Beast', 129, 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=300&q=80')">Add to Cart</button>
-                </div>
-
-                <div class="product-card slide-animate slide-up" style="animation-delay: 0.1s;" onclick="addToCart(21, 'Social Media Command', 179, 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Social" class="product-image">
-                        <span class="discount-badge">-65%</span>
-                    </div>
-                    <h3 class="product-name">📱 Social Media Command Center</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-count">(987)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$499</span>
-                        <span class="sale-price"><sup>$</sup>179</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(21, 'Social Media Command', 179, 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80')">Add to Cart</button>
-                </div>
-
-                <div class="product-card slide-animate slide-up" style="animation-delay: 0.2s;" onclick="addToCart(22, 'Video Marketing Kit', 159, 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80" alt="Video" class="product-image">
-                        <span class="discount-badge">-82%</span>
-                    </div>
-                    <h3 class="product-name">🎬 Video Marketing Masterkit</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(1,102)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$899</span>
-                        <span class="sale-price"><sup>$</sup>159</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(22, 'Video Marketing Kit', 159, 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80')">Add to Cart</button>
-                </div>
-
-                <div class="product-card slide-animate slide-up" style="animation-delay: 0.3s;" onclick="addToCart(23, 'Influencer Database', 149, 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=300&q=80')">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=300&q=80" alt="Influencer" class="product-image">
-                        <span class="discount-badge">-74%</span>
-                    </div>
-                    <h3 class="product-name">⭐ Influencer Marketing Database</h3>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(654)</span>
-                    </div>
-                    <div class="price-container">
-                        <span class="original-price">$549</span>
-                        <span class="sale-price"><sup>$</sup>149</span>
-                    </div>
-                    <p class="shipping-badge">Ships <span>FREE</span></p>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(23, 'Influencer Database', 149, 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=300&q=80')">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Banner -->
-            <div class="banner-section slide-animate scale-in" style="margin-top: 2rem;">
-                <div class="banner-card">
-                    <div class="banner-content">
-                        <h2>🚀 ULTIMATE Marketing Bundle</h2>
-                        <p>Get ALL products for one incredible price - Save over $9,000!</p>
-                    </div>
-                    <a href="#" class="banner-btn" onclick="addToCart(99, 'ULTIMATE Bundle', 997, 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80')">Shop Now →</a>
-                </div>
-            </div>
-
+    <!-- 03: TRAINING & COURSES -->
+    <section class="category-block" id="courses-section" data-category="courses">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-number">03</span>
+          <h2 class="section-title">🎓 Training & Certification Courses</h2>
         </div>
+        <a href="#courses-section" class="see-more">View All Courses →</a>
+      </div>
+
+      <div class="product-grid">
+        <div class="product-card" data-title="Digital Marketing Mastery Course">
+          <span class="card-badge">-80%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" alt="Marketing Mastery" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">Masterclass</span>
+            <h3 class="card-title">Digital Marketing Mastery 2026 Certification</h3>
+            <div class="rating">★★★★★ <span>(3,421)</span></div>
+            <div class="price-row">
+              <span class="old-price">$697</span>
+              <span class="current-price">$149</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Digital Marketing Mastery', 149)">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-title="AI Video Creation Masterclass">
+          <span class="card-badge">-85%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600" alt="Video Masterclass" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">New Course</span>
+            <h3 class="card-title">AI Video Creation Masterclass — From Zero to Pro</h3>
+            <div class="rating">★★★★★ <span>(1,105)</span></div>
+            <div class="price-row">
+              <span class="old-price">$599</span>
+              <span class="current-price">$99</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('AI Video Creation Masterclass', 99)">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-title="SEO Certification Program">
+          <span class="card-badge">-85%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600" alt="SEO Program" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">SEO</span>
+            <h3 class="card-title">SEO Certification Program & Ranking Blueprint</h3>
+            <div class="rating">★★★★★ <span>(2,876)</span></div>
+            <div class="price-row">
+              <span class="old-price">$899</span>
+              <span class="current-price">$129</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('SEO Certification Program', 129)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-col">
-                <h4>Get to Know Us</h4>
-                <a href="#">Careers</a>
-                <a href="#">Blog</a>
-                <a href="#">About NEXUS</a>
-                <a href="#">Investor Relations</a>
-            </div>
-            <div class="footer-col">
-                <h4>Training & Courses</h4>
-                <a href="#">Digital Marketing</a>
-                <a href="#">SEO Certification</a>
-                <a href="#">Social Media</a>
-                <a href="#">Content Writing</a>
-            </div>
-            <div class="footer-col">
-                <h4>Payment Products</h4>
-                <a href="#">Business Credit</a>
-                <a href="#">Seller Credit</a>
-                <a href="#">Payment Gateway</a>
-                <a href="#">Currency Converter</a>
-            </div>
-            <div class="footer-col">
-                <h4>Let Us Help You</h4>
-                <a href="#">Your Account</a>
-                <a href="#">Your Orders</a>
-                <a href="#">Shipping Rates</a>
-                <a href="#">Help</a>
-            </div>
+    <!-- 04: DESIGN BUNDLES -->
+    <section class="category-block" id="design-section" data-category="design">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-number">04</span>
+          <h2 class="section-title">🎨 Design Bundles & Kits</h2>
         </div>
-        <div class="footer-divider"></div>
-        <div class="footer-bottom">
-            <div class="footer-logo">NEXUS<span>Digital</span></div>
-            <div class="footer-links">
-                <a href="#">Conditions of Use</a>
-                <a href="#">Privacy Notice</a>
-                <a href="#">Interest-Based Ads</a>
-                <a href="#">© 2024 NEXUS Digital. All rights reserved.</a>
-            </div>
-        </div>
-    </footer>
+        <a href="#design-section" class="see-more">View All Design →</a>
+      </div>
 
-    <!-- Cart Modal -->
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-header">
-            <h2>Shopping Cart</h2>
-            <button class="close-cart" onclick="closeCart()">×</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="cart-empty">
-                <div class="cart-empty-icon">🛒</div>
-                <p style="font-weight: 600;">Your cart is empty</p>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Items you add to your cart will appear here</p>
+      <div class="product-grid">
+        <div class="product-card" data-title="Design Everything Bundle">
+          <span class="card-badge">-85%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600" alt="Design Bundle" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">Graphic Suite</span>
+            <h3 class="card-title">Design Everything Bundle — 100,000+ Graphic Assets</h3>
+            <div class="rating">★★★★★ <span>(5,890)</span></div>
+            <div class="price-row">
+              <span class="old-price">$1,299</span>
+              <span class="current-price">$199</span>
             </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Design Everything Bundle', 199)">Add to Cart</button>
+          </div>
         </div>
-        <div class="cart-footer">
-            <div class="cart-subtotal">
-                <span>Subtotal:</span>
-                <span id="cartSubtotal">$0</span>
+
+        <div class="product-card" data-title="Complete Brand Identity Kit">
+          <span class="card-badge">-83%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=600" alt="Brand Kit" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">Branding</span>
+            <h3 class="card-title">Complete Brand Identity Kit — Logos, Fonts & Palettes</h3>
+            <div class="rating">★★★★★ <span>(3,210)</span></div>
+            <div class="price-row">
+              <span class="old-price">$1,199</span>
+              <span class="current-price">$199</span>
             </div>
-            <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Complete Brand Identity Kit', 199)">Add to Cart</button>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 05: MARKETING TOOLS -->
+    <section class="category-block" id="marketing-section" data-category="marketing">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-number">05</span>
+          <h2 class="section-title">🚀 Marketing & SEO Suites</h2>
+        </div>
+        <a href="#marketing-section" class="see-more">View All Marketing →</a>
+      </div>
+
+      <div class="product-grid">
+        <div class="product-card" data-title="Pro Marketing Suite - Complete Automation">
+          <span class="card-badge">-75%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" alt="Pro Marketing" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">All-in-One Suite</span>
+            <h3 class="card-title">Pro Marketing Suite — Complete Automation Platform</h3>
+            <div class="rating">★★★★★ <span>(2,847)</span></div>
+            <div class="price-row">
+              <span class="old-price">$999</span>
+              <span class="current-price">$249</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('Pro Marketing Suite', 249)">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-title="SEO Supercharger Toolkit">
+          <span class="card-badge">-70%</span>
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600" alt="SEO Suite" class="card-img" />
+          </div>
+          <div class="card-body">
+            <span class="card-category">SEO Software</span>
+            <h3 class="card-title">SEO Supercharger Toolkit — Backlinks & Ranking Engine</h3>
+            <div class="rating">★★★★★ <span>(1,520)</span></div>
+            <div class="price-row">
+              <span class="old-price">$749</span>
+              <span class="current-price">$229</span>
+            </div>
+            <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
+            <button class="add-btn" onclick="addToCart('SEO Supercharger Toolkit', 229)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CART DRAWER -->
+  <div class="backdrop" id="backdrop" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>Your Digital Cart</h3>
+      <button onclick="toggleCart()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">✕</button>
     </div>
-
-    <!-- Checkout Modal -->
-    <div class="checkout-modal" id="checkoutModal">
-        <div class="checkout-container">
-            <div class="checkout-header">
-                <h2>Checkout</h2>
-                <button class="close-checkout" onclick="closeCheckout()">×</button>
-            </div>
-            <div class="checkout-body">
-                <div class="checkout-form">
-                    <h3>Contact Information</h3>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="customerName" placeholder="John Smith">
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" id="customerEmail" placeholder="john@example.com">
-                    </div>
-
-                    <h3>Payment Method</h3>
-                    <div class="payment-methods">
-                        <div class="payment-option selected" onclick="selectPayment('card')">
-                            <span class="payment-icon">💳</span>
-                            <div class="payment-info">
-                                <h4>Credit / Debit Card</h4>
-                                <p>Visa, Mastercard, Amex</p>
-                            </div>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment('paypal')">
-                            <span class="payment-icon">🅿️</span>
-                            <div class="payment-info">
-                                <h4>PayPal</h4>
-                                <p>Pay with your PayPal account</p>
-                            </div>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment('bank')">
-                            <span class="payment-icon">🏦</span>
-                            <div class="payment-info">
-                                <h4>Bank Transfer</h4>
-                                <p>Direct bank deposit</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="cardPayment">
-                        <div class="form-group">
-                            <label>Card Number</label>
-                            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Expiry</label>
-                                <input type="text" placeholder="MM/YY" maxlength="5">
-                            </div>
-                            <div class="form-group">
-                                <label>CVC</label>
-                                <input type="text" placeholder="123" maxlength="3">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bank-details" id="bankDetails">
-                        <div class="bank-info-row">
-                            <span>Bank Name:</span>
-                            <span>Chase Bank</span>
-                        </div>
-                        <div class="bank-info-row">
-                            <span>Account:</span>
-                            <span>NEXUS Digital LLC</span>
-                        </div>
-                        <div class="bank-info-row">
-                            <span>Routing:</span>
-                            <span>021000021 <button class="copy-btn">Copy</button></span>
-                        </div>
-                        <div class="bank-info-row">
-                            <span>Account #:</span>
-                            <span>********7890</span>
-                        </div>
-                    </div>
-
-                    <button class="process-payment" onclick="processPayment()">Pay Now</button>
-                    <div class="secure-badge">🔒 256-bit SSL Encrypted | 30-day Money Back Guarantee</div>
-                </div>
-
-                <div class="order-summary">
-                    <h3>Order Summary</h3>
-                    <div id="checkoutItems"></div>
-                    <div class="summary-item">
-                        <span>Shipping:</span>
-                        <span style="color: var(--success);">FREE</span>
-                    </div>
-                    <div class="summary-total">
-                        <span>Total:</span>
-                        <span id="checkoutTotal">$0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="cart-items" id="cartItems">
+      <p style="color:#6b7280; text-align:center; margin-top:40px;">Your cart is empty.</p>
     </div>
-
-    <!-- Success Modal -->
-    <div class="success-modal" id="successModal">
-        <div class="success-content">
-            <div class="success-icon">✓</div>
-            <h2>Order Confirmed!</h2>
-            <p>Thank you for your purchase. Your order has been successfully placed.</p>
-            <div class="order-id">Order #<span id="orderId">NX-2024-0001</span></div>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">A confirmation email has been sent. Download links are available in your account.</p>
-            <button class="success-btn" onclick="closeSuccess()">Continue Shopping</button>
-        </div>
+    <div style="border-top:1px solid var(--border-color); padding-top:15px; margin-top:auto;">
+      <div style="display:flex; justify-content:space-between; font-weight:700; font-size:18px;">
+        <span>Total:</span>
+        <span id="cartTotal" style="color:var(--accent-orange);">$0</span>
+      </div>
+      <button class="checkout-btn" style="width:100%;" onclick="proceedPayPal()">⚡ Checkout with PayPal</button>
     </div>
+  </div>
 
-    <!-- Scroll to Top -->
-    <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">Product added to cart!</div>
 
-    <script>
-        let cart = [];
+  <script>
+    let cart = [];
 
-        function addToCart(id, name, price, image) {
-            const existingItem = cart.find(item => item.id === id);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({ id, name, price, image, quantity: 1 });
-            }
-            updateCartUI();
-            event.target.textContent = '✓ Added!';
-            setTimeout(() => { event.target.textContent = 'Add to Cart'; }, 1500);
+    // CATEGORY FILTERING
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      if(btn) btn.classList.add('active');
+
+      const sections = document.querySelectorAll('.category-block');
+      sections.forEach(sec => {
+        if(cat === 'all' || sec.getAttribute('data-category') === cat) {
+          sec.style.display = 'block';
+        } else {
+          sec.style.display = 'none';
         }
+      });
+    }
 
-        function updateCartUI() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartSubtotal = document.getElementById('cartSubtotal');
-            
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            cartCount.textContent = totalItems;
-            cartSubtotal.textContent = '$' + totalPrice;
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = `
-                    <div class="cart-empty">
-                        <div class="cart-empty-icon">🛒</div>
-                        <p style="font-weight: 600;">Your cart is empty</p>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Items you add to your cart will appear here</p>
-                    </div>
-                `;
-            } else {
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <div class="price">$${item.price}</div>
-                            <div class="cart-item-qty">
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
-                                <span>${item.quantity}</span>
-                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                            </div>
-                            <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            document.getElementById('checkoutItems').innerHTML = cart.map(item => `
-                <div class="summary-item">
-                    <span>${item.name} × ${item.quantity}</span>
-                    <span>$${item.price * item.quantity}</span>
-                </div>
-            `).join('');
-            document.getElementById('checkoutTotal').textContent = '$' + totalPrice;
+    // SEARCH FILTERING
+    function applySearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.product-card');
+
+      cards.forEach(card => {
+        const title = (card.getAttribute('data-title') || '').toLowerCase();
+        if(title.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
         }
+      });
+    }
 
-        function updateQuantity(id, change) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) removeFromCart(id);
-                else updateCartUI();
-            }
-        }
+    document.getElementById('searchInput').addEventListener('keyup', (e) => {
+      if(e.key === 'Enter') applySearch();
+      else if(e.target.value === '') {
+        document.querySelectorAll('.product-card').forEach(c => c.style.display = 'flex');
+      }
+    });
 
-        function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
-            updateCartUI();
-        }
+    // CART OPERATIONS
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('open');
+      document.getElementById('backdrop').classList.toggle('open');
+    }
 
-        function openCart() {
-            document.getElementById('cartModal').classList.add('open');
-            document.getElementById('cartOverlay').classList.add('open');
-        }
+    function addToCart(title, price) {
+      cart.push({ title, price });
+      updateCartUI();
+      showToast(`${title} added to cart!`);
+    }
 
-        function closeCart() {
-            document.getElementById('cartModal').classList.remove('open');
-            document.getElementById('cartOverlay').classList.remove('open');
-        }
+    function updateCartUI() {
+      document.getElementById('cartCount').innerText = cart.length;
+      const list = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
 
-        function openCheckout() {
-            if (cart.length === 0) { alert('Your cart is empty!'); return; }
-            closeCart();
-            document.getElementById('checkoutModal').classList.add('open');
-        }
+      if(cart.length === 0) {
+        list.innerHTML = '<p style="color:#6b7280; text-align:center; margin-top:40px;">Your cart is empty.</p>';
+        totalEl.innerText = '$0';
+        return;
+      }
 
-        function closeCheckout() {
-            document.getElementById('checkoutModal').classList.remove('open');
-        }
+      list.innerHTML = '';
+      let sum = 0;
+      cart.forEach((item, index) => {
+        sum += item.price;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div>
+            <div style="font-size:14px; font-weight:700;">${item.title}</div>
+            <div style="font-size:13px; color:var(--accent-orange);">$${item.price}</div>
+          </div>
+          <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#ef4444; cursor:pointer;">✕</button>
+        `;
+        list.appendChild(div);
+      });
 
-        function selectPayment(method) {
-            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-            
-            if (method === 'bank') {
-                document.getElementById('bankDetails').classList.add('show');
-                document.getElementById('cardPayment').style.display = 'none';
-            } else {
-                document.getElementById('bankDetails').classList.remove('show');
-                document.getElementById('cardPayment').style.display = 'block';
-            }
-        }
+      totalEl.innerText = '$' + sum;
+    }
 
-        function processPayment() {
-            const name = document.getElementById('customerName').value;
-            const email = document.getElementById('customerEmail').value;
-            
-            if (!name || !email) { alert('Please fill in all required fields'); return; }
-            
-            const btn = document.querySelector('.process-payment');
-            btn.textContent = 'Processing...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                document.getElementById('orderId').textContent = 'NX-2024-' + Math.floor(Math.random() * 10000);
-                document.getElementById('successModal').classList.add('open');
-                cart = [];
-                updateCartUI();
-                btn.textContent = 'Pay Now';
-                btn.disabled = false;
-                closeCheckout();
-            }, 2000);
-        }
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
 
-        function closeSuccess() {
-            document.getElementById('successModal').classList.remove('open');
-        }
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
 
-        // Scroll Animation Observer
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.slide-animate').forEach(el => observer.observe(el));
-
-        window.addEventListener('scroll', () => {
-            const scrollBtn = document.querySelector('.scroll-top');
-            if (window.scrollY > 500) scrollBtn.classList.add('visible');
-            else scrollBtn.classList.remove('visible');
-        });
-    </script>
+    function proceedPayPal() {
+      if(cart.length === 0) {
+        alert('Cart is empty!');
+        return;
+      }
+      alert('Redirecting to PayPal Checkout... Total: ' + document.getElementById('cartTotal').innerText);
+    }
+  </script>
 </body>
 </html>
