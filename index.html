@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -547,21 +548,27 @@
       </div>
 
       <div class="product-grid">
+        <!-- Product 1 -->
         <div class="product-card" data-title="Cinematic LUTs & Color Grading Master Pack">
           <span class="card-badge">-85%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=luts-pack" class="card-img-wrap" style="display:block;">
             <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600" alt="LUTs Pack" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">Video Editing</span>
-            <h3 class="card-title">Cinematic LUTs & Color Grade Pro Pack (500+ Presets)</h3>
+            <a href="product.html?id=luts-pack" style="text-decoration:none; color:inherit;">
+              <h3 class="card-title">Cinematic LUTs & Color Grade Pro Pack (500+ Presets)</h3>
+            </a>
             <div class="rating">★★★★★ <span>(1,940)</span></div>
             <div class="price-row">
               <span class="old-price">$299</span>
               <span class="current-price">$49</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Cinematic LUTs Master Pack', 49)">Add to Cart</button>
+            <div style="display:flex; gap:8px;">
+              <button class="add-btn" onclick="addToCart('Cinematic LUTs Master Pack', 49)" style="flex:1;">Add to Cart</button>
+              <a href="product.html?id=luts-pack" style="background:#1f2937; color:#fff; text-decoration:none; padding:11px 14px; border-radius:8px; font-weight:700; font-size:13px; display:flex; align-items:center;">Details →</a>
+            </div>
           </div>
         </div>
 
@@ -1006,4 +1013,3 @@
   </script>
 </body>
 </html>
-
