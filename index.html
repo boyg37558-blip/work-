@@ -26,21 +26,9 @@
       --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-main); line-height: 1.5; overflow-x: hidden; }
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-main);
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
-
-    /* HEADER & NAV */
     header {
       background: #0f1218;
       border-bottom: 1px solid var(--border-color);
@@ -68,10 +56,7 @@
       align-items: center;
       letter-spacing: -0.5px;
     }
-
-    .logo span {
-      color: var(--accent-orange);
-    }
+    .logo span { color: var(--accent-orange); }
 
     .search-bar {
       flex: 1;
@@ -111,34 +96,12 @@
       cursor: pointer;
       transition: background 0.2s;
     }
+    .search-btn:hover { background: var(--accent-hover); }
 
-    .search-btn:hover {
-      background: var(--accent-hover);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 13px;
-      display: flex;
-      flex-direction: column;
-      transition: color 0.2s;
-    }
-
-    .nav-link span:first-child {
-      font-size: 11px;
-      color: #6b7280;
-    }
-
-    .nav-link:hover {
-      color: #fff;
-    }
+    .nav-actions { display: flex; align-items: center; gap: 20px; }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 13px; display: flex; flex-direction: column; transition: color 0.2s; }
+    .nav-link span:first-child { font-size: 11px; color: #6b7280; }
+    .nav-link:hover { color: #fff; }
 
     .cart-btn {
       background: #1e2430;
@@ -164,7 +127,7 @@
       border-radius: 20px;
     }
 
-    /* CATEGORY FILTER BAR */
+    /* FILTER BAR */
     .filter-bar {
       background: #11141b;
       border-bottom: 1px solid var(--border-color);
@@ -193,23 +156,11 @@
       transition: all 0.2s;
     }
 
-    .filter-tab:hover {
-      color: #fff;
-      background: #1a1f2b;
-    }
+    .filter-tab:hover { color: #fff; background: #1a1f2b; }
+    .filter-tab.active { background: var(--accent-orange); color: #000; border-color: var(--accent-orange); }
 
-    .filter-tab.active {
-      background: var(--accent-orange);
-      color: #000;
-      border-color: var(--accent-orange);
-    }
-
-    /* MAIN CONTENT */
-    .main-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 30px 20px 60px;
-    }
+    /* MAIN CONTAINER */
+    .main-container { max-width: 1300px; margin: 0 auto; padding: 30px 20px 60px; }
 
     /* SECTION HEADER */
     .section-header {
@@ -221,35 +172,10 @@
       border-bottom: 1px solid var(--border-color);
     }
 
-    .section-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-number {
-      background: var(--accent-orange);
-      color: #000;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .see-more {
-      color: var(--accent-orange);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-    }
+    .section-title-wrap { display: flex; align-items: center; gap: 12px; }
+    .section-number { background: var(--accent-orange); color: #000; font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 6px; }
+    .section-title { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .see-more { color: var(--accent-orange); text-decoration: none; font-size: 13px; font-weight: 600; }
 
     /* PRODUCT GRID */
     .product-grid {
@@ -289,11 +215,13 @@
     }
 
     .card-img-wrap {
+      display: block;
       position: relative;
       width: 100%;
       height: 180px;
       background: #181d26;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .card-img {
@@ -303,9 +231,7 @@
       transition: transform 0.3s;
     }
 
-    .product-card:hover .card-img {
-      transform: scale(1.05);
-    }
+    .product-card:hover .card-img { transform: scale(1.05); }
 
     .card-body {
       padding: 16px;
@@ -329,7 +255,11 @@
       color: #fff;
       margin-bottom: 8px;
       line-height: 1.3;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
     }
+    .card-title:hover { color: var(--accent-orange); }
 
     .rating {
       color: #fbbf24;
@@ -339,11 +269,7 @@
       gap: 4px;
       margin-bottom: 10px;
     }
-
-    .rating span {
-      color: var(--text-muted);
-      font-size: 11px;
-    }
+    .rating span { color: var(--text-muted); font-size: 11px; }
 
     .price-row {
       display: flex;
@@ -353,47 +279,45 @@
       margin-bottom: 12px;
     }
 
-    .old-price {
-      color: #6b7280;
-      text-decoration: line-through;
-      font-size: 14px;
-    }
+    .old-price { color: #6b7280; text-decoration: line-through; font-size: 14px; }
+    .current-price { color: var(--accent-orange); font-size: 22px; font-weight: 800; }
+    .delivery-info { font-size: 11px; color: var(--text-muted); margin-bottom: 14px; }
+    .delivery-info span { color: #10b981; font-weight: 700; }
 
-    .current-price {
-      color: var(--accent-orange);
-      font-size: 22px;
-      font-weight: 800;
-    }
-
-    .delivery-info {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .delivery-info span {
-      color: #10b981;
-      font-weight: 700;
+    .card-actions {
+      display: flex;
+      gap: 8px;
     }
 
     .add-btn {
       background: var(--accent-orange);
       color: #000;
       border: none;
-      padding: 11px;
+      padding: 10px;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
-      width: 100%;
+      flex: 1;
       transition: background 0.2s;
     }
+    .add-btn:hover { background: var(--accent-hover); }
 
-    .add-btn:hover {
-      background: var(--accent-hover);
+    .details-btn {
+      background: #1f2937;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      transition: background 0.2s;
     }
+    .details-btn:hover { background: #374151; color: var(--accent-orange); }
 
-    /* CART MODAL / DRAWER */
+    /* CART DRAWER */
     .cart-drawer {
       position: fixed;
       top: 0;
@@ -409,10 +333,7 @@
       transition: right 0.3s ease;
       box-shadow: -10px 0 30px rgba(0,0,0,0.5);
     }
-
-    .cart-drawer.open {
-      right: 0;
-    }
+    .cart-drawer.open { right: 0; }
 
     .cart-drawer-header {
       display: flex;
@@ -423,14 +344,7 @@
       margin-bottom: 18px;
     }
 
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
+    .cart-items { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -451,12 +365,8 @@
       z-index: 150;
       display: none;
     }
+    .backdrop.open { display: block; }
 
-    .backdrop.open {
-      display: block;
-    }
-
-    /* TOAST NOTIFICATION */
     .toast {
       position: fixed;
       bottom: 25px;
@@ -472,11 +382,7 @@
       transition: all 0.3s;
       z-index: 300;
     }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    .toast.show { transform: translateY(0); opacity: 1; }
 
     @media (max-width: 768px) {
       .search-bar { display: none; }
@@ -490,7 +396,7 @@
   <!-- HEADER -->
   <header>
     <div class="nav-container">
-      <a href="#" class="logo">NEXUS<span>Digital</span></a>
+      <a href="index.html" class="logo">NEXUS<span>Digital</span></a>
 
       <div class="search-bar">
         <select class="search-category" id="searchCat">
@@ -548,81 +454,91 @@
       </div>
 
       <div class="product-grid">
-        <!-- Product 1 -->
+        <!-- 1. LUTs Pack -->
         <div class="product-card" data-title="Cinematic LUTs & Color Grading Master Pack">
           <span class="card-badge">-85%</span>
-          <a href="product.html?id=luts-pack" class="card-img-wrap" style="display:block;">
+          <a href="product.html?id=luts-pack" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600" alt="LUTs Pack" class="card-img" />
           </a>
           <div class="card-body">
             <span class="card-category">Video Editing</span>
-            <a href="product.html?id=luts-pack" style="text-decoration:none; color:inherit;">
-              <h3 class="card-title">Cinematic LUTs & Color Grade Pro Pack (500+ Presets)</h3>
-            </a>
+            <a href="product.html?id=luts-pack" class="card-title">Cinematic LUTs & Color Grade Pro Pack (500+ Presets)</a>
             <div class="rating">★★★★★ <span>(1,940)</span></div>
             <div class="price-row">
               <span class="old-price">$299</span>
               <span class="current-price">$49</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <div style="display:flex; gap:8px;">
-              <button class="add-btn" onclick="addToCart('Cinematic LUTs Master Pack', 49)" style="flex:1;">Add to Cart</button>
-              <a href="product.html?id=luts-pack" style="background:#1f2937; color:#fff; text-decoration:none; padding:11px 14px; border-radius:8px; font-weight:700; font-size:13px; display:flex; align-items:center;">Details →</a>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Cinematic LUTs Master Pack', 49)">Add to Cart</button>
+              <a href="product.html?id=luts-pack" class="details-btn">Details →</a>
             </div>
           </div>
         </div>
 
-        <div class="product-card" data-title="Premiere Pro Transitions & Sound FX Suite">
+        <!-- 2. Motion FX -->
+        <div class="product-card" data-title="Motion FX & Cinematic Sound Library">
           <span class="card-badge">-80%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=motion-fx" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600" alt="Premiere Pack" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
-            <span class="card-category">Premiere Pro</span>
-            <h3 class="card-title">Motion FX & Cinematic Sound Library (2,500+ Assets)</h3>
+            <span class="card-category">Premiere Pro / Sound FX</span>
+            <a href="product.html?id=motion-fx" class="card-title">Motion FX & Cinematic Sound Library (2,500+ Assets)</a>
             <div class="rating">★★★★★ <span>(2,810)</span></div>
             <div class="price-row">
               <span class="old-price">$399</span>
               <span class="current-price">$79</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Motion FX Sound Library', 79)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Motion FX Sound Library', 79)">Add to Cart</button>
+              <a href="product.html?id=motion-fx" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
-        <div class="product-card" data-title="After Effects Viral Reels & Shorts Template Kit">
+        <!-- 3. Viral Reels -->
+        <div class="product-card" data-title="Viral Reels & TikTok Editing Templates">
           <span class="card-badge">-90%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=viral-reels" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?w=600" alt="AE Templates" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">Templates</span>
-            <h3 class="card-title">Viral Reels & TikTok Editing Templates (AE & CapCut)</h3>
+            <a href="product.html?id=viral-reels" class="card-title">Viral Reels & TikTok Editing Templates (AE & CapCut)</a>
             <div class="rating">★★★★★ <span>(4,120)</span></div>
             <div class="price-row">
               <span class="old-price">$499</span>
               <span class="current-price">$59</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Viral Reels Editing Templates', 59)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Viral Reels Editing Templates', 59)">Add to Cart</button>
+              <a href="product.html?id=viral-reels" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
-        <div class="product-card" data-title="AI 3D Motion & Title Animations">
+        <!-- 4. 3D Motion Titles -->
+        <div class="product-card" data-title="3D Kinetic Typography & Motion Title Suite">
           <span class="card-badge">-82%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=3d-titles" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" alt="3D Motion" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">VFX & Titles</span>
-            <h3 class="card-title">3D Kinetic Typography & Motion Title Suite</h3>
+            <a href="product.html?id=3d-titles" class="card-title">3D Kinetic Typography & Motion Title Suite</a>
             <div class="rating">★★★★★ <span>(840)</span></div>
             <div class="price-row">
               <span class="old-price">$249</span>
               <span class="current-price">$39</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('3D Kinetic Typography Suite', 39)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('3D Kinetic Typography Suite', 39)">Add to Cart</button>
+              <a href="product.html?id=3d-titles" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -639,39 +555,47 @@
       </div>
 
       <div class="product-grid">
+        <!-- 5. AI Content Generator -->
         <div class="product-card" data-title="AI Content Generator Pro">
           <span class="card-badge">-78%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=ai-content-generator" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600" alt="AI Generator" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">AI Automation</span>
-            <h3 class="card-title">AI Content Generator Pro — Unlimited Copy Engine</h3>
+            <a href="product.html?id=ai-content-generator" class="card-title">AI Content Generator Pro — Unlimited Copy Engine</a>
             <div class="rating">★★★★★ <span>(3,450)</span></div>
             <div class="price-row">
               <span class="old-price">$897</span>
               <span class="current-price">$179</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('AI Content Generator Pro', 179)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('AI Content Generator Pro', 179)">Add to Cart</button>
+              <a href="product.html?id=ai-content-generator" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
+        <!-- 6. AI Chatbot Builder -->
         <div class="product-card" data-title="AI Chatbot Builder Pro">
           <span class="card-badge">-75%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=ai-chatbot-builder" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?w=600" alt="Chatbot" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">AI Chatbots</span>
-            <h3 class="card-title">AI Chatbot Builder Pro — No-Code Customer Bot</h3>
+            <a href="product.html?id=ai-chatbot-builder" class="card-title">AI Chatbot Builder Pro — No-Code Customer Bot</a>
             <div class="rating">★★★★★ <span>(2,190)</span></div>
             <div class="price-row">
               <span class="old-price">$799</span>
               <span class="current-price">$189</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('AI Chatbot Builder Pro', 189)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('AI Chatbot Builder Pro', 189)">Add to Cart</button>
+              <a href="product.html?id=ai-chatbot-builder" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -688,57 +612,69 @@
       </div>
 
       <div class="product-grid">
+        <!-- 7. Digital Marketing Mastery -->
         <div class="product-card" data-title="Digital Marketing Mastery Course">
           <span class="card-badge">-80%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=digital-marketing-mastery" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" alt="Marketing Mastery" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">Masterclass</span>
-            <h3 class="card-title">Digital Marketing Mastery 2026 Certification</h3>
+            <a href="product.html?id=digital-marketing-mastery" class="card-title">Digital Marketing Mastery 2026 Certification</a>
             <div class="rating">★★★★★ <span>(3,421)</span></div>
             <div class="price-row">
               <span class="old-price">$697</span>
               <span class="current-price">$149</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Digital Marketing Mastery', 149)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Digital Marketing Mastery', 149)">Add to Cart</button>
+              <a href="product.html?id=digital-marketing-mastery" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
+        <!-- 8. AI Video Masterclass -->
         <div class="product-card" data-title="AI Video Creation Masterclass">
           <span class="card-badge">-85%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=ai-video-masterclass" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600" alt="Video Masterclass" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">New Course</span>
-            <h3 class="card-title">AI Video Creation Masterclass — From Zero to Pro</h3>
+            <a href="product.html?id=ai-video-masterclass" class="card-title">AI Video Creation Masterclass — From Zero to Pro</a>
             <div class="rating">★★★★★ <span>(1,105)</span></div>
             <div class="price-row">
               <span class="old-price">$599</span>
               <span class="current-price">$99</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('AI Video Creation Masterclass', 99)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('AI Video Creation Masterclass', 99)">Add to Cart</button>
+              <a href="product.html?id=ai-video-masterclass" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
+        <!-- 9. SEO Certification -->
         <div class="product-card" data-title="SEO Certification Program">
           <span class="card-badge">-85%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=seo-certification" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600" alt="SEO Program" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">SEO</span>
-            <h3 class="card-title">SEO Certification Program & Ranking Blueprint</h3>
+            <a href="product.html?id=seo-certification" class="card-title">SEO Certification Program & Ranking Blueprint</a>
             <div class="rating">★★★★★ <span>(2,876)</span></div>
             <div class="price-row">
               <span class="old-price">$899</span>
               <span class="current-price">$129</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('SEO Certification Program', 129)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('SEO Certification Program', 129)">Add to Cart</button>
+              <a href="product.html?id=seo-certification" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -755,39 +691,47 @@
       </div>
 
       <div class="product-grid">
+        <!-- 10. Design Everything Bundle -->
         <div class="product-card" data-title="Design Everything Bundle">
           <span class="card-badge">-85%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=design-bundle" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600" alt="Design Bundle" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">Graphic Suite</span>
-            <h3 class="card-title">Design Everything Bundle — 100,000+ Graphic Assets</h3>
+            <a href="product.html?id=design-bundle" class="card-title">Design Everything Bundle — 100,000+ Graphic Assets</a>
             <div class="rating">★★★★★ <span>(5,890)</span></div>
             <div class="price-row">
               <span class="old-price">$1,299</span>
               <span class="current-price">$199</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Design Everything Bundle', 199)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Design Everything Bundle', 199)">Add to Cart</button>
+              <a href="product.html?id=design-bundle" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
+        <!-- 11. Complete Brand Identity Kit -->
         <div class="product-card" data-title="Complete Brand Identity Kit">
           <span class="card-badge">-83%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=brand-identity" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=600" alt="Brand Kit" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">Branding</span>
-            <h3 class="card-title">Complete Brand Identity Kit — Logos, Fonts & Palettes</h3>
+            <a href="product.html?id=brand-identity" class="card-title">Complete Brand Identity Kit — Logos, Fonts & Palettes</a>
             <div class="rating">★★★★★ <span>(3,210)</span></div>
             <div class="price-row">
               <span class="old-price">$1,199</span>
               <span class="current-price">$199</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Complete Brand Identity Kit', 199)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Complete Brand Identity Kit', 199)">Add to Cart</button>
+              <a href="product.html?id=brand-identity" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -804,39 +748,47 @@
       </div>
 
       <div class="product-grid">
+        <!-- 12. Pro Marketing Suite -->
         <div class="product-card" data-title="Pro Marketing Suite - Complete Automation">
           <span class="card-badge">-75%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=pro-marketing-suite" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" alt="Pro Marketing" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">All-in-One Suite</span>
-            <h3 class="card-title">Pro Marketing Suite — Complete Automation Platform</h3>
+            <a href="product.html?id=pro-marketing-suite" class="card-title">Pro Marketing Suite — Complete Automation Platform</a>
             <div class="rating">★★★★★ <span>(2,847)</span></div>
             <div class="price-row">
               <span class="old-price">$999</span>
               <span class="current-price">$249</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('Pro Marketing Suite', 249)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('Pro Marketing Suite', 249)">Add to Cart</button>
+              <a href="product.html?id=pro-marketing-suite" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
 
+        <!-- 13. SEO Supercharger Toolkit -->
         <div class="product-card" data-title="SEO Supercharger Toolkit">
           <span class="card-badge">-70%</span>
-          <div class="card-img-wrap">
+          <a href="product.html?id=seo-toolkit" class="card-img-wrap">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600" alt="SEO Suite" class="card-img" />
-          </div>
+          </a>
           <div class="card-body">
             <span class="card-category">SEO Software</span>
-            <h3 class="card-title">SEO Supercharger Toolkit — Backlinks & Ranking Engine</h3>
+            <a href="product.html?id=seo-toolkit" class="card-title">SEO Supercharger Toolkit — Backlinks & Ranking Engine</a>
             <div class="rating">★★★★★ <span>(1,520)</span></div>
             <div class="price-row">
               <span class="old-price">$749</span>
               <span class="current-price">$229</span>
             </div>
             <div class="delivery-info">Ships <span>FREE</span> by Instant Digital Download</div>
-            <button class="add-btn" onclick="addToCart('SEO Supercharger Toolkit', 229)">Add to Cart</button>
+            <div class="card-actions">
+              <button class="add-btn" onclick="addToCart('SEO Supercharger Toolkit', 229)">Add to Cart</button>
+              <a href="product.html?id=seo-toolkit" class="details-btn">Details →</a>
+            </div>
           </div>
         </div>
       </div>
