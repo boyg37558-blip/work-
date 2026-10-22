@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payment Successful — Download Your Products | NEXUSDigital</title>
+  <title>Order Confirmed — Access Your Digital Assets | NEXUSDigital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
       --bg-dark: #0a0c10;
       --card-bg: #12151c;
       --accent-orange: #f59e0b;
+      --accent-hover: #d97706;
       --accent-green: #10b981;
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
@@ -36,7 +37,7 @@
       padding: 16px 24px;
     }
     .nav-wrap {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -51,19 +52,19 @@
     .logo span { color: var(--accent-orange); }
 
     .main-container {
-      max-width: 750px;
-      margin: 50px auto 60px;
+      max-width: 900px;
+      margin: 40px auto 60px;
       padding: 0 20px;
       flex: 1;
-      text-align: center;
     }
 
     .success-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 40px 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      text-align: center;
     }
 
     .check-icon {
@@ -75,13 +76,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px;
+      margin: 0 auto 20px;
       color: var(--accent-green);
-      font-size: 38px;
+      font-size: 36px;
+      font-weight: 800;
     }
 
     h1 {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 800;
       margin-bottom: 10px;
       color: #fff;
@@ -90,84 +92,182 @@
       color: var(--text-muted);
       font-size: 16px;
       margin-bottom: 30px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .product-box {
+    .order-status-banner {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-green);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 35px;
+    }
+
+    /* DOWNLOAD MODULES GRID */
+    .modules-title {
+      font-size: 20px;
+      font-weight: 800;
+      text-align: left;
+      margin-bottom: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modules-title span {
+      background: var(--accent-orange);
+      color: #000;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 35px;
+      text-align: left;
+    }
+
+    .module-card {
+      background: #090b0f;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .module-card:hover {
+      border-color: var(--accent-orange);
+      transform: translateY(-3px);
+    }
+
+    .module-badge {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .module-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .module-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .btn-download-module {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent-orange);
+      color: #000;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-download-module:hover {
+      background: var(--accent-hover);
+    }
+
+    .master-download-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(18, 21, 28, 1) 100%);
+      border: 2px solid var(--accent-orange);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 35px;
+      text-align: center;
+    }
+    .master-download-box h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .master-download-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .btn-master-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--accent-orange);
+      color: #000;
+      font-weight: 800;
+      font-size: 17px;
+      padding: 16px 36px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-master-download:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .instructions-box {
       background: #090b0f;
       border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 24px;
+      text-align: left;
       margin-bottom: 30px;
-      text-align: left;
     }
-    .product-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .order-id {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .download-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background: #f59e0b;
-      color: #000;
-      font-weight: 800;
-      font-size: 18px;
-      padding: 16px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
-    }
-    .download-btn:hover {
-      background: #d97706;
-      transform: translateY(-2px);
-    }
-
-    .instructions {
-      margin-top: 30px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border-color);
-      text-align: left;
-    }
-    .instructions h3 {
+    .instructions-box h3 {
       font-size: 15px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
-    .instructions ul {
+    .instructions-box ul {
       list-style: none;
-      color: var(--text-muted);
       font-size: 14px;
+      color: var(--text-muted);
     }
-    .instructions li {
+    .instructions-box li {
       margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .instructions li::before {
+    .instructions-box li::before {
       content: "✓";
       color: var(--accent-green);
       font-weight: bold;
     }
 
     .support-bar {
-      margin-top: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
+      gap: 16px;
       flex-wrap: wrap;
     }
     .whatsapp-btn {
@@ -178,21 +278,27 @@
       color: #fff;
       font-weight: 700;
       font-size: 14px;
-      padding: 10px 18px;
+      padding: 12px 22px;
       border-radius: 8px;
       text-decoration: none;
+      transition: opacity 0.2s;
     }
-    .home-link {
+    .whatsapp-btn:hover { opacity: 0.9; }
+
+    .back-store-btn {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 14px;
       font-weight: 600;
+      padding: 12px 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
     }
-    .home-link:hover { color: #fff; }
+    .back-store-btn:hover { color: #fff; border-color: #fff; }
 
     footer {
       border-top: 1px solid var(--border-color);
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       color: var(--text-muted);
       font-size: 13px;
@@ -204,85 +310,113 @@
   <header>
     <div class="nav-wrap">
       <a href="index.html" class="logo">NEXUS<span>Digital</span></a>
-      <a href="index.html" class="home-link">← Back to Store</a>
+      <a href="index.html" class="back-store-btn">← Back to Store</a>
     </div>
   </header>
 
   <main class="main-container">
     <div class="success-card">
       <div class="check-icon">✓</div>
-      <h1>Thank You For Your Order!</h1>
-      <p class="subtext">Your payment has been successfully processed via PayPal. Your digital access is ready below.</p>
+      <h1>Payment Confirmed!</h1>
+      <p class="subtext">Thank you for your purchase. Your digital package has been verified and instant lifetime download access has been unlocked below.</p>
 
-      <div class="product-box">
-        <div class="product-title" id="itemTitle">Digital Assets Complete Bundle</div>
-        <div class="order-id" id="orderInfo">Status: Verified & Confirmed Instant Access</div>
+      <div class="order-status-banner">
+        <span>🛡️</span> PayPal Verified Transaction • Commercial Resell License Included
+      </div>
 
-        <!-- MAIN DOWNLOAD BUTTON -->
-        <a id="downloadButton" href="https://drive.google.com" target="_blank" class="download-btn">
+      <!-- MASTER ONE-CLICK DOWNLOAD -->
+      <div class="master-download-box">
+        <h2 id="orderHeaderTitle">NEXUSDigital Complete Master Creator Suite</h2>
+        <p>Instant Google Drive access to all high-resolution project files, 4K video reels, LUTs, and prompt archives.</p>
+        <a id="masterDownloadBtn" href="https://drive.google.com" target="_blank" class="btn-master-download">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          Download Digital Files (Instant Drive Access)
+          One-Click Instant Download (Google Drive)
         </a>
       </div>
 
-      <div class="instructions">
-        <h3>How to access your files:</h3>
+      <!-- INDIVIDUAL MODULES -->
+      <div class="modules-title">
+        <span>INCLUDED</span> Download Individual Module Packs
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div>
+            <div class="module-badge">MODULE 01 • AI VAULT</div>
+            <h3>10,000+ AI Prompts Master Vault</h3>
+            <p>10,850+ structured prompts for Marketing, Copywriting, Coding, E-commerce, SEO, and Midjourney 4K images.</p>
+          </div>
+          <a href="https://drive.google.com" target="_blank" class="btn-download-module">
+            Download Prompts Vault (.zip)
+          </a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div>
+            <div class="module-badge">MODULE 02 • VIDEO ASSETS</div>
+            <h3>Faceless Viral Reels Library (4K)</h3>
+            <p>250+ vertical 9:16 aesthetic clips covering Luxury, Cyberpunk, Motivation, and Nature for TikTok & Reels.</p>
+          </div>
+          <a href="https://drive.google.com" target="_blank" class="btn-download-module">
+            Download Reels Pack (.zip)
+          </a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div>
+            <div class="module-badge">MODULE 03 • SOUND & COLOR</div>
+            <h3>Cinematic LUTs & 500+ SFX Studio</h3>
+            <p>50+ .cube 3D LUTs (Teal & Orange, Vintage Film) + 500+ lossless WAV sound effects (Whooshes, Hits, Risers).</p>
+          </div>
+          <a href="https://drive.google.com" target="_blank" class="btn-download-module">
+            Download LUTs & SFX (.zip)
+          </a>
+        </div>
+      </div>
+
+      <!-- INSTRUCTIONS -->
+      <div class="instructions-box">
+        <h3>How to get the most out of your files:</h3>
         <ul>
-          <li>Click the golden download button above to open the secure Google Drive folder.</li>
-          <li>All presets, project files, and installation guides (.PDF & .TXT) are included.</li>
-          <li>Make a backup copy to your personal drive for lifetime access.</li>
-          <li>A copy of your access details has also been registered with your PayPal email.</li>
+          <li>Click any of the golden download buttons to access the secure Google Drive cloud folder.</li>
+          <li>Right-click and select "Make a copy" to save the assets directly to your personal Drive.</li>
+          <li>LUT files (.cube) can be directly imported into Adobe Premiere, DaVinci Resolve, Final Cut Pro, or CapCut.</li>
+          <li>All audio sound effects are delivered in pristine 24-bit/48kHz WAV and 320kbps MP3.</li>
+          <li>Commercial usage license documentation is included in each folder root.</li>
         </ul>
       </div>
 
+      <!-- SUPPORT -->
       <div class="support-bar">
         <a href="https://wa.me/918799484961?text=Hi%20NEXUSDigital%20Support,%20I%20just%20purchased%20a%20product%20and%20need%20help" target="_blank" class="whatsapp-btn">
-          💬 Need help? WhatsApp Support
+          💬 Need Help? Instant WhatsApp Support
         </a>
-        <a href="index.html" class="home-link">Continue Shopping</a>
+        <a href="index.html" class="back-store-btn">Continue Shopping</a>
       </div>
     </div>
   </main>
 
   <footer>
-    © 2026 NEXUSDigital — Instant Digital Downloads & Tools. All rights reserved.
+    © 2026 NEXUSDigital — Instant Digital Downloads & Premium Tools. All rights reserved.
   </footer>
 
   <script>
-    // Read product ID or Name from URL
+    // Handle URL parameters for dynamic product titles
     const params = new URLSearchParams(window.location.search);
     const prodId = params.get('id');
     const prodName = params.get('name');
 
-    // Default download links repository (Can be customized for each product)
-    const downloadLinks = {
-      'luts-pack': 'https://drive.google.com',
-      'motion-fx': 'https://drive.google.com',
-      'viral-reels': 'https://drive.google.com',
-      '3d-titles': 'https://drive.google.com',
-      'ai-content-generator': 'https://drive.google.com',
-      'ai-chatbot-builder': 'https://drive.google.com',
-      'digital-marketing-mastery': 'https://drive.google.com',
-      'ai-video-masterclass': 'https://drive.google.com',
-      'seo-certification': 'https://drive.google.com',
-      'design-bundle': 'https://drive.google.com',
-      'brand-identity': 'https://drive.google.com',
-      'pro-marketing-suite': 'https://drive.google.com',
-      'seo-toolkit': 'https://drive.google.com'
-    };
-
     if (prodName) {
-      document.getElementById('itemTitle').textContent = decodeURIComponent(prodName);
-    } else if (prodId && downloadLinks[prodId]) {
-      document.getElementById('itemTitle').textContent = 'Order Item: ' + prodId.replace(/-/g, ' ').toUpperCase();
-    }
-
-    if (prodId && downloadLinks[prodId]) {
-      document.getElementById('downloadButton').href = downloadLinks[prodId];
+      document.getElementById('orderHeaderTitle').textContent = decodeURIComponent(prodName) + ' — Instant Access';
+    } else if (prodId) {
+      document.getElementById('orderHeaderTitle').textContent = prodId.replace(/-/g, ' ').toUpperCase() + ' — Instant Access';
     }
   </script>
 </body>
