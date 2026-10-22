@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful — Download Your Products | NEXUSDigital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --card-bg: #12151c;
+      --accent-orange: #f59e0b;
+      --accent-green: #10b981;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: #262b36;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #0f1218;
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+    }
+    .nav-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo span { color: var(--accent-orange); }
+
+    .main-container {
+      max-width: 750px;
+      margin: 50px auto 60px;
+      padding: 0 20px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .success-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .check-icon {
+      width: 76px;
+      height: 76px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 2px solid var(--accent-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--accent-green);
+      font-size: 38px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .subtext {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .product-box {
+      background: #090b0f;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+    .product-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .order-id {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #f59e0b;
+      color: #000;
+      font-weight: 800;
+      font-size: 18px;
+      padding: 16px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+    }
+    .download-btn:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    .instructions {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      text-align: left;
+    }
+    .instructions h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .instructions ul {
+      list-style: none;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .instructions li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .instructions li::before {
+      content: "✓";
+      color: var(--accent-green);
+      font-weight: bold;
+    }
+
+    .support-bar {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .home-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .home-link:hover { color: #fff; }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-wrap">
+      <a href="index.html" class="logo">NEXUS<span>Digital</span></a>
+      <a href="index.html" class="home-link">← Back to Store</a>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div class="success-card">
+      <div class="check-icon">✓</div>
+      <h1>Thank You For Your Order!</h1>
+      <p class="subtext">Your payment has been successfully processed via PayPal. Your digital access is ready below.</p>
+
+      <div class="product-box">
+        <div class="product-title" id="itemTitle">Digital Assets Complete Bundle</div>
+        <div class="order-id" id="orderInfo">Status: Verified & Confirmed Instant Access</div>
+
+        <!-- MAIN DOWNLOAD BUTTON -->
+        <a id="downloadButton" href="https://drive.google.com" target="_blank" class="download-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Digital Files (Instant Drive Access)
+        </a>
+      </div>
+
+      <div class="instructions">
+        <h3>How to access your files:</h3>
+        <ul>
+          <li>Click the golden download button above to open the secure Google Drive folder.</li>
+          <li>All presets, project files, and installation guides (.PDF & .TXT) are included.</li>
+          <li>Make a backup copy to your personal drive for lifetime access.</li>
+          <li>A copy of your access details has also been registered with your PayPal email.</li>
+        </ul>
+      </div>
+
+      <div class="support-bar">
+        <a href="https://wa.me/918799484961?text=Hi%20NEXUSDigital%20Support,%20I%20just%20purchased%20a%20product%20and%20need%20help" target="_blank" class="whatsapp-btn">
+          💬 Need help? WhatsApp Support
+        </a>
+        <a href="index.html" class="home-link">Continue Shopping</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 NEXUSDigital — Instant Digital Downloads & Tools. All rights reserved.
+  </footer>
+
+  <script>
+    // Read product ID or Name from URL
+    const params = new URLSearchParams(window.location.search);
+    const prodId = params.get('id');
+    const prodName = params.get('name');
+
+    // Default download links repository (Can be customized for each product)
+    const downloadLinks = {
+      'luts-pack': 'https://drive.google.com',
+      'motion-fx': 'https://drive.google.com',
+      'viral-reels': 'https://drive.google.com',
+      '3d-titles': 'https://drive.google.com',
+      'ai-content-generator': 'https://drive.google.com',
+      'ai-chatbot-builder': 'https://drive.google.com',
+      'digital-marketing-mastery': 'https://drive.google.com',
+      'ai-video-masterclass': 'https://drive.google.com',
+      'seo-certification': 'https://drive.google.com',
+      'design-bundle': 'https://drive.google.com',
+      'brand-identity': 'https://drive.google.com',
+      'pro-marketing-suite': 'https://drive.google.com',
+      'seo-toolkit': 'https://drive.google.com'
+    };
+
+    if (prodName) {
+      document.getElementById('itemTitle').textContent = decodeURIComponent(prodName);
+    } else if (prodId && downloadLinks[prodId]) {
+      document.getElementById('itemTitle').textContent = 'Order Item: ' + prodId.replace(/-/g, ' ').toUpperCase();
+    }
+
+    if (prodId && downloadLinks[prodId]) {
+      document.getElementById('downloadButton').href = downloadLinks[prodId];
+    }
+  </script>
+</body>
+</html>
