@@ -442,6 +442,19 @@
   <!-- MAIN BODY -->
   <main class="main-container">
 
+    <!-- SEARCH RESULT BANNER & EMPTY STATE -->
+    <div id="searchNotice" style="display:none; margin-bottom: 25px; padding: 14px 20px; background: #12151c; border: 1px solid var(--border-color); border-radius: 12px; justify-content: space-between; align-items: center;">
+      <span id="searchNoticeText" style="color: #fff; font-size: 15px; font-weight: 600;"></span>
+      <button onclick="resetSearch()" style="background: none; border: 1px solid var(--border-color); color: var(--accent-orange); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 13px;">Clear Filter ✕</button>
+    </div>
+    
+    <div id="noResultsBox" style="display:none; text-align:center; padding: 60px 20px; background: #12151c; border: 1px solid var(--border-color); border-radius: 16px; margin: 20px 0 60px;">
+      <div style="font-size: 48px; margin-bottom: 16px;">🔍</div>
+      <h3 style="font-size: 22px; color: #fff; margin-bottom: 8px;">No Products Found</h3>
+      <p id="noResultsQuery" style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px; max-width: 500px; margin-left:auto; margin-right:auto;"></p>
+      <button onclick="resetSearch()" style="background: var(--accent-orange); color: #000; font-weight: 800; padding: 12px 24px; border-radius: 8px; border:none; cursor: pointer; font-size: 15px;">View All 13 Products</button>
+    </div>
+
     <!-- 01: VIDEO EDITING & VFX -->
     <section class="category-block" id="video-section" data-category="video">
       <div class="section-header">
@@ -479,7 +492,7 @@
         <div class="product-card" data-title="Motion FX & Cinematic Sound Library">
           <span class="card-badge">-80%</span>
           <a href="product.html?id=motion-fx" class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600" alt="Premiere Pack" class="card-img" />
+            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600" alt="Premiere Pack" class="card-img" />
           </a>
           <div class="card-body">
             <span class="card-category">Premiere Pro / Sound FX</span>
@@ -824,42 +837,110 @@
   <script>
     let cart = [];
 
-    // CATEGORY FILTERING
+    // CATEGORY & SEARCH FILTERING (INSTANT REAL-TIME)
+    let currentCategory = 'all';
+
     function filterCategory(cat, btn) {
+      currentCategory = cat;
       document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
       if(btn) btn.classList.add('active');
+      
+      const catSelect = document.getElementById('searchCat');
+      if(catSelect) catSelect.value = cat;
 
+      applySearch();
+    }
+
+    function applySearch() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const catSelect = document.getElementById('searchCat');
+      const selectedCat = catSelect ? catSelect.value : currentCategory;
+      
       const sections = document.querySelectorAll('.category-block');
+      const notice = document.getElementById('searchNotice');
+      const noticeText = document.getElementById('searchNoticeText');
+      const noResultsBox = document.getElementById('noResultsBox');
+      const noResultsQuery = document.getElementById('noResultsQuery');
+
+      let totalMatches = 0;
+
       sections.forEach(sec => {
-        if(cat === 'all' || sec.getAttribute('data-category') === cat) {
+        const secCat = sec.getAttribute('data-category');
+        const catMatches = (selectedCat === 'all' || secCat === selectedCat);
+        
+        let secVisibleCount = 0;
+        const secCards = sec.querySelectorAll('.product-card');
+        
+        secCards.forEach(card => {
+          const title = (card.getAttribute('data-title') || '').toLowerCase();
+          const cardBody = card.innerText.toLowerCase();
+          const matchesQuery = (q === '' || title.includes(q) || cardBody.includes(q));
+
+          if(catMatches && matchesQuery) {
+            card.style.display = 'flex';
+            secVisibleCount++;
+            totalMatches++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if(secVisibleCount > 0) {
           sec.style.display = 'block';
         } else {
           sec.style.display = 'none';
         }
       });
+
+      if(q !== '' || selectedCat !== 'all') {
+        notice.style.display = 'flex';
+        let filterDesc = [];
+        if(q) filterDesc.push('matching "' + q + '"');
+        if(selectedCat !== 'all') filterDesc.push('in ' + selectedCat.toUpperCase());
+        noticeText.innerHTML = 'Found <strong style="color:var(--accent-orange);">' + totalMatches + '</strong> product' + (totalMatches === 1 ? '' : 's') + ' ' + filterDesc.join(' ');
+      } else {
+        notice.style.display = 'none';
+      }
+
+      if(totalMatches === 0) {
+        noResultsBox.style.display = 'block';
+        noResultsQuery.innerText = 'We couldn\'t find any products matching "' + q + '". Try searching for "Reels", "LUTs", "AI", "SEO", or "Courses".';
+      } else {
+        noResultsBox.style.display = 'none';
+      }
     }
 
-    // SEARCH FILTERING
-    function applySearch() {
-      const q = document.getElementById('searchInput').value.toLowerCase().trim();
-      const cards = document.querySelectorAll('.product-card');
+    function resetSearch() {
+      document.getElementById('searchInput').value = '';
+      const catSelect = document.getElementById('searchCat');
+      if(catSelect) catSelect.value = 'all';
+      filterCategory('all', document.querySelector('.filter-tab'));
+    }
 
-      cards.forEach(card => {
-        const title = (card.getAttribute('data-title') || '').toLowerCase();
-        if(title.includes(q)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+    // Instant real-time typing listener
+    const searchInput = document.getElementById('searchInput');
+    if(searchInput) {
+      searchInput.addEventListener('input', applySearch);
+      searchInput.addEventListener('keyup', (e) => {
+        if(e.key === 'Enter') applySearch();
       });
     }
 
-    document.getElementById('searchInput').addEventListener('keyup', (e) => {
-      if(e.key === 'Enter') applySearch();
-      else if(e.target.value === '') {
-        document.querySelectorAll('.product-card').forEach(c => c.style.display = 'flex');
-      }
-    });
+    const searchCat = document.getElementById('searchCat');
+    if(searchCat) {
+      searchCat.addEventListener('change', (e) => {
+        currentCategory = e.target.value;
+        document.querySelectorAll('.filter-tab').forEach(b => {
+          const onclickAttr = b.getAttribute('onclick') || '';
+          if(onclickAttr.includes("'" + e.target.value + "'")) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+        applySearch();
+      });
+    }
 
     // CART OPERATIONS
     function toggleCart() {
