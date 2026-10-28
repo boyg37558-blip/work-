@@ -155,6 +155,14 @@
     <!-- DETAILS & FEATURES BREAKDOWN -->
     <div class="details-grid">
       <div class="main-details">
+        
+        <div class="content-card" id="targetAudienceCard">
+          <h3>🎯 Who Is This For?</h3>
+          <ul class="feature-list" id="targetAudienceList">
+            <!-- Dynamically injected -->
+          </ul>
+        </div>
+
         <div class="content-card">
           <h3>📦 What Is Included Inside</h3>
           <ul class="feature-list" id="includedList">
@@ -419,6 +427,13 @@
         discount: "-80% OFF",
         img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
         desc: "Extract thousands of targeted, verified business leads (Emails, Phone Numbers, Social Profiles, Decision Maker names) from Google Maps and LinkedIn in minutes. Features built-in email verification and automated CSV/Excel export. Includes full unencrypted Python source code and ready-to-run desktop executable for Windows & Mac.",
+
+        targetAudience: [
+          "<strong>Digital Marketing & SEO Agencies:</strong> Extract thousands of verified local business leads (dentists, realtors, contractors) to pitch high-ticket services.",
+          "<strong>Freelancers & Solopreneurs:</strong> Find direct emails and phone numbers of decision-makers to land clients without paying $200/month for Apollo or ZoomInfo.",
+          "<strong>B2B Sales Teams & Cold Emailers:</strong> Scale automated outbound campaigns with built-in SMTP email deliverability validation.",
+          "<strong>Business Brokers & Consultants:</strong> Source targeted proprietary client contact lists on complete autopilot."
+        ],
         rating: "(1,420 Reviews)",
         included: [
           "Full Python source code + Windows/macOS 1-click executable",
@@ -435,6 +450,13 @@
         discount: "-78% OFF",
         img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800",
         desc: "Build an automated faceless video empire on autopilot. AutoReels AI generates viral scripts using GPT/Claude, synthesizes hyper-realistic human voiceovers via ElevenLabs, pairs 4K background footage, burns kinetic animated subtitles, and automatically schedules the output directly to TikTok, Instagram Reels, and YouTube Shorts daily.",
+
+        targetAudience: [
+          "<strong>Faceless Channel Builders:</strong> Build high-earning viral cash-cow channels on YouTube Shorts, TikTok, and Instagram without showing your face.",
+          "<strong>Affiliate Marketers:</strong> Mass-produce 30+ short-form product review videos daily to generate passive commission sales.",
+          "<strong>Social Media Agencies:</strong> Automate script writing, realistic ElevenLabs voiceovers, 4K b-roll matching, and daily multi-platform scheduling for clients.",
+          "<strong>Busy Founders & Solopreneurs:</strong> Maintain constant daily social media presence and traffic while saving 20+ hours of manual editing each week."
+        ],
         rating: "(2,890 Reviews)",
         included: [
           "Complete automated video production engine (Node.js & Python)",
@@ -451,6 +473,13 @@
         discount: "-80% OFF",
         img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
         desc: "Skip weeks of repetitive setup and ship your profitable SaaS in days. Built with modern Next.js 14 App Router, Tailwind CSS, TypeScript, Supabase / PostgreSQL auth, pre-built PayPal & Stripe subscription billing, user profile settings, and ready-made AI API integration endpoints.",
+
+        targetAudience: [
+          "<strong>Web Developers & Software Engineers:</strong> Skip 200+ hours of repetitive setup with a battle-tested Next.js 14 codebase pre-configured for PayPal and Stripe billing.",
+          "<strong>Indie Hackers & Tech Founders:</strong> Build, launch, and monetize a micro-SaaS startup in a single weekend instead of several months.",
+          "<strong>Freelance Coders & Consultants:</strong> Deliver production-grade client portals and SaaS MVPs rapidly at premium commercial rates.",
+          "<strong>Full-Stack Developers:</strong> Leverage ready-made authentication (Supabase / Google OAuth), database schemas, and 40+ dark-mode Shadcn UI components."
+        ],
         rating: "(3,110 Reviews)",
         included: [
           "Production-ready Next.js 14 TypeScript repository",
@@ -467,6 +496,12 @@
         discount: "-78% OFF",
         img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
         desc: "Dominate Google search rankings on programmatic scale. SEO AutoBlog Engine automatically researches long-tail keywords, generates 2,000+ word SEO-optimized articles with tables, FAQs, and schema markup, fetches royalty-free HD header images, and auto-publishes to your WordPress or Webflow site on a custom drip schedule.",
+
+        targetAudience: [
+          "<strong>Affiliate Marketers & Niche Site Owners:</strong> Programmatically publish 100+ keyword-targeted ranking articles every day to capture massive search traffic.",
+          "<strong>SEO Agencies:</strong> Automate comprehensive content pipelines with structured headings, FAQ schema markup, and royalty-free HD imagery.",
+          "<strong>WordPress & Webflow Site Builders:</strong> Drip-feed high-authority informational articles on custom schedules to dominate search engine results."
+        ],
         rating: "(1,870 Reviews)",
         included: [
           "WordPress Plugin (.zip) + Standalone Python API publisher",
@@ -537,6 +572,22 @@
         li.innerHTML = `<span class="check-icon">✓</span> ${item}`;
         listEl.appendChild(li);
       });
+    }
+
+    
+    // Render Target Audience List ("Who Is This For?")
+    const audienceEl = document.getElementById('targetAudienceList');
+    if (prod.targetAudience && audienceEl) {
+      audienceEl.innerHTML = '';
+      prod.targetAudience.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = item;
+        audienceEl.appendChild(li);
+      });
+      document.getElementById('targetAudienceCard').style.display = 'block';
+    } else if (audienceEl) {
+      // General fallback audience for video and design assets
+      audienceEl.innerHTML = '<li><strong>Content Creators & Editors:</strong> Designed for modern video editors, YouTubers, and digital agencies seeking professional-grade commercial assets.</li><li><strong>Commercial Projects:</strong> 100% Royalty-free license included for both personal and client commercial monetization.</li>';
     }
 
     // RENDER LIVE PAYPAL BUTTON FOR THIS PRODUCT
