@@ -390,16 +390,21 @@
     }
   
     /* ==========================================
-       TRENDING HERO CAROUSEL / SLIDER
+       TRENDING HERO CAROUSEL / SLIDER (INTERACTIVE)
     ========================================== */
     .trending-slider-wrapper {
       position: relative;
       margin-bottom: 45px;
       border-radius: 20px;
-      background: linear-gradient(135deg, #121620 0%, #0d1017 100%);
+      background: #0d1017;
       border: 1px solid #2a3142;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.08);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.1);
       overflow: hidden;
+      user-select: none;
+      cursor: grab;
+    }
+    .trending-slider-wrapper:active {
+      cursor: grabbing;
     }
 
     .trending-badge-top {
@@ -410,7 +415,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(245, 158, 11, 0.15);
+      background: rgba(10, 12, 16, 0.85);
       border: 1px solid var(--accent-orange);
       color: var(--accent-orange);
       font-size: 12px;
@@ -439,193 +444,195 @@
 
     .slider-track {
       display: flex;
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
       width: 100%;
     }
 
     .slider-slide {
       min-width: 100%;
       box-sizing: border-box;
-      padding: 70px 40px 45px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .slide-info {
+      position: relative;
+      height: 480px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      justify-content: flex-end;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Large background photo */
+    .slide-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+      z-index: 1;
+    }
+
+    .slider-slide:hover .slide-bg-img {
+      transform: scale(1.05);
+    }
+
+    /* Dark gradient overlay so text/buttons pop */
+    .slide-gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(10, 12, 16, 0.2) 0%, rgba(10, 12, 16, 0.7) 50%, rgba(10, 12, 16, 0.98) 100%);
       z-index: 2;
     }
 
-    .slide-category {
-      color: var(--accent-orange);
-      font-size: 13px;
+    /* Bottom content area inside image */
+    .slide-content-bottom {
+      position: relative;
+      z-index: 3;
+      padding: 30px 40px 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 900px;
+    }
+
+    .slide-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .slide-cat-badge {
+      background: var(--accent-orange);
+      color: #000;
+      font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    .slide-title {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1.25;
-      color: #ffffff;
-      margin: 0;
-    }
-
-    .slide-desc {
-      color: #9ca3af;
-      font-size: 15px;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .slide-price-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 15px;
-      margin-top: 5px;
-    }
-
-    .slide-current-price {
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--accent-orange);
-    }
-
-    .slide-old-price {
-      font-size: 20px;
-      color: #6b7280;
-      text-decoration: line-through;
-    }
-
-    .slide-discount-badge {
-      background: #ef4444;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 800;
+      letter-spacing: 1px;
       padding: 4px 10px;
       border-radius: 6px;
     }
 
-    .slide-rating {
-      color: #fbbf24;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .slide-discount-tag {
+      background: #ef4444;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
     }
 
-    .slide-actions {
+    .slide-rating-stars {
+      color: #fbbf24;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* Product name right above button */
+    .slide-product-name {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+      margin: 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Bottom row with Price, Buy Now, and Details button */
+    .slide-action-row {
       display: flex;
-      gap: 15px;
-      margin-top: 10px;
+      align-items: center;
+      gap: 20px;
+      margin-top: 8px;
       flex-wrap: wrap;
     }
 
-    .slide-btn-primary {
+    .slide-price-tag {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .slide-price-current {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent-orange);
+    }
+
+    .slide-price-old {
+      font-size: 18px;
+      color: #9ca3af;
+      text-decoration: line-through;
+    }
+
+    /* Buttons inside the image */
+    .slide-btn-buy {
       background: var(--accent-orange);
       color: #000;
       font-weight: 800;
       font-size: 15px;
-      padding: 14px 28px;
+      padding: 12px 26px;
       border-radius: 10px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
       border: none;
       cursor: pointer;
     }
 
-    .slide-btn-primary:hover {
+    .slide-btn-buy:hover {
       background: var(--accent-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
     }
 
-    .slide-btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
+    .slide-btn-details {
+      background: rgba(255, 255, 255, 0.12);
       color: #fff;
       font-weight: 700;
-      font-size: 15px;
-      padding: 14px 24px;
+      font-size: 14px;
+      padding: 12px 22px;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .slide-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-    }
-
-    .slide-media {
-      position: relative;
-      display: flex;
-      justify-content: center;
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
-    }
-
-    .slide-media-wrap {
-      position: relative;
-      width: 100%;
-      height: 320px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid #2a3142;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-    }
-
-    .slide-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .slider-slide:hover .slide-img {
-      transform: scale(1.04);
-    }
-
-    .slide-floating-tag {
-      position: absolute;
-      bottom: 15px;
-      left: 15px;
-      background: rgba(10, 12, 16, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 20px;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: all 0.2s ease;
       backdrop-filter: blur(8px);
     }
 
-    /* Slider Arrows */
+    .slide-btn-details:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #fff;
+    }
+
+    /* Navigation Arrows */
     .slider-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: rgba(18, 22, 32, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(13, 16, 23, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      font-size: 18px;
+      font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 10;
       transition: all 0.2s ease;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
     }
 
     .slider-arrow:hover {
@@ -635,17 +642,16 @@
       transform: translateY(-50%) scale(1.1);
     }
 
-    .slider-arrow.prev { left: 15px; }
-    .slider-arrow.next { right: 15px; }
+    .slider-arrow.prev { left: 18px; }
+    .slider-arrow.next { right: 18px; }
 
-    /* Slider Dots */
+    /* Navigation Dots */
     .slider-dots {
       position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 12px;
+      right: 35px;
       display: flex;
-      gap: 10px;
+      gap: 8px;
       z-index: 10;
     }
 
@@ -660,20 +666,18 @@
 
     .slider-dot.active {
       background: var(--accent-orange);
-      width: 32px;
-      border-radius: 10px;
+      width: 28px;
+      border-radius: 8px;
     }
 
-    @media (max-width: 900px) {
-      .slider-slide {
-        grid-template-columns: 1fr;
-        padding: 65px 25px 40px;
-      }
-      .slide-title { font-size: 24px; }
-      .slide-media-wrap { height: 220px; }
-      .slider-arrow { display: none; }
+    @media (max-width: 768px) {
+      .slider-slide { height: 420px; }
+      .slide-content-bottom { padding: 20px 20px 25px; }
+      .slide-product-name { font-size: 20px; }
+      .slide-price-current { font-size: 24px; }
+      .slider-arrow { width: 36px; height: 36px; font-size: 16px; }
+      .slider-dots { right: 20px; bottom: 8px; }
     }
-
   </style>
 </head>
 <body>
@@ -744,7 +748,7 @@
     </div>
 
     
-    <!-- HERO TRENDING SLIDER (AUTO-SLIDING) -->
+    <!-- HERO TRENDING SLIDER (AUTO-SLIDING & DRAGGABLE) -->
     <section class="trending-slider-wrapper" id="trendingSlider">
       <div class="trending-badge-top">
         <span class="pulse-dot"></span>
@@ -757,101 +761,89 @@
       <div class="slider-track" id="trendingTrack">
         
         <!-- Slide 1: LeadGen Pro -->
-        <div class="slider-slide">
-          <div class="slide-info">
-            <span class="slide-category">⚡ B2B Lead Scraper & Cold Outreach</span>
-            <h2 class="slide-title">LeadGen Pro — Automated B2B Lead Scraper Engine</h2>
-            <p class="slide-desc">Extract thousands of targeted, verified business leads (Emails, Direct Phones, Decision Makers) from Google Maps & LinkedIn in seconds. Full unencrypted Python source code + Windows/Mac GUI.</p>
-            <div class="slide-rating">★★★★★ <span>4.9 (1,420 Reviews)</span></div>
-            <div class="slide-price-wrap">
-              <span class="slide-current-price">$99</span>
-              <span class="slide-old-price">$499</span>
-              <span class="slide-discount-badge">-80% OFF</span>
+        <div class="slider-slide" onclick="window.location.href='product.html?id=leadgen-pro'">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400" alt="LeadGen Pro Software" class="slide-bg-img" />
+          <div class="slide-gradient-overlay"></div>
+          <div class="slide-content-bottom">
+            <div class="slide-tag-row">
+              <span class="slide-cat-badge">⚡ B2B Automation Software</span>
+              <span class="slide-discount-tag">-80% OFF</span>
+              <span class="slide-rating-stars">★★★★★ 4.9 (1,420 Reviews)</span>
             </div>
-            <div class="slide-actions">
-              <a href="product.html?id=leadgen-pro" class="slide-btn-primary">View Product Details ➔</a>
-              <button class="slide-btn-secondary" onclick="addToCart('LeadGen Pro Software', 99)">Add to Cart 🛒</button>
-            </div>
-          </div>
-          <div class="slide-media">
-            <div class="slide-media-wrap">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900" alt="LeadGen Pro" class="slide-img" />
-              <div class="slide-floating-tag">⚡ Full Python Code Included</div>
+            <h2 class="slide-product-name">LeadGen Pro — Automated B2B Lead Scraper & Cold Outreach Engine</h2>
+            <div class="slide-action-row" onclick="event.stopPropagation()">
+              <div class="slide-price-tag">
+                <span class="slide-price-current">$99</span>
+                <span class="slide-price-old">$499</span>
+              </div>
+              <a href="product.html?id=leadgen-pro" class="slide-btn-buy">Buy Now ⚡</a>
+              <a href="product.html?id=leadgen-pro" class="slide-btn-details">Product Details ➔</a>
             </div>
           </div>
         </div>
 
         <!-- Slide 2: AutoReels AI -->
-        <div class="slider-slide">
-          <div class="slide-info">
-            <span class="slide-category">🤖 AI Video Automation & Social Growth</span>
-            <h2 class="slide-title">AutoReels AI — Faceless Video Generator & Auto-Poster</h2>
-            <p class="slide-desc">Build and monetize faceless YouTube Shorts, TikTok, and Instagram Reels on autopilot. AI scripts, realistic ElevenLabs voiceovers, 4K b-roll matching, and daily auto-scheduler.</p>
-            <div class="slide-rating">★★★★★ <span>5.0 (2,890 Reviews)</span></div>
-            <div class="slide-price-wrap">
-              <span class="slide-current-price">$149</span>
-              <span class="slide-old-price">$699</span>
-              <span class="slide-discount-badge">-78% OFF</span>
+        <div class="slider-slide" onclick="window.location.href='product.html?id=autoreels-ai'">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1400" alt="AutoReels AI Software" class="slide-bg-img" />
+          <div class="slide-gradient-overlay"></div>
+          <div class="slide-content-bottom">
+            <div class="slide-tag-row">
+              <span class="slide-cat-badge">🤖 AI Video Auto-Poster</span>
+              <span class="slide-discount-tag">-78% OFF</span>
+              <span class="slide-rating-stars">★★★★★ 5.0 (2,890 Reviews)</span>
             </div>
-            <div class="slide-actions">
-              <a href="product.html?id=autoreels-ai" class="slide-btn-primary">View Product Details ➔</a>
-              <button class="slide-btn-secondary" onclick="addToCart('AutoReels AI Software', 149)">Add to Cart 🛒</button>
-            </div>
-          </div>
-          <div class="slide-media">
-            <div class="slide-media-wrap">
-              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900" alt="AutoReels AI" class="slide-img" />
-              <div class="slide-floating-tag">🎥 100% Automated Video Bot</div>
+            <h2 class="slide-product-name">AutoReels AI — Faceless Video Generator & Social Media Auto-Poster</h2>
+            <div class="slide-action-row" onclick="event.stopPropagation()">
+              <div class="slide-price-tag">
+                <span class="slide-price-current">$149</span>
+                <span class="slide-price-old">$699</span>
+              </div>
+              <a href="product.html?id=autoreels-ai" class="slide-btn-buy">Buy Now ⚡</a>
+              <a href="product.html?id=autoreels-ai" class="slide-btn-details">Product Details ➔</a>
             </div>
           </div>
         </div>
 
         <!-- Slide 3: SaaS LaunchPad -->
-        <div class="slider-slide">
-          <div class="slide-info">
-            <span class="slide-category">💻 Full-Stack Next.js 14 Developer Kit</span>
-            <h2 class="slide-title">SaaS LaunchPad — Next.js 14 Boilerplate (PayPal + Stripe)</h2>
-            <p class="slide-desc">Ship your profitable SaaS startup in 48 hours. Pre-configured PayPal & Stripe subscriptions, Supabase auth, 40+ dark-mode Shadcn UI components, and clean TypeScript codebase.</p>
-            <div class="slide-rating">★★★★★ <span>4.9 (3,110 Reviews)</span></div>
-            <div class="slide-price-wrap">
-              <span class="slide-current-price">$199</span>
-              <span class="slide-old-price">$999</span>
-              <span class="slide-discount-badge">-80% OFF</span>
+        <div class="slider-slide" onclick="window.location.href='product.html?id=saas-launchpad'">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400" alt="SaaS LaunchPad" class="slide-bg-img" />
+          <div class="slide-gradient-overlay"></div>
+          <div class="slide-content-bottom">
+            <div class="slide-tag-row">
+              <span class="slide-cat-badge">💻 Next.js 14 Boilerplate</span>
+              <span class="slide-discount-tag">-80% OFF</span>
+              <span class="slide-rating-stars">★★★★★ 4.9 (3,110 Reviews)</span>
             </div>
-            <div class="slide-actions">
-              <a href="product.html?id=saas-launchpad" class="slide-btn-primary">View Product Details ➔</a>
-              <button class="slide-btn-secondary" onclick="addToCart('SaaS LaunchPad Boilerplate', 199)">Add to Cart 🛒</button>
-            </div>
-          </div>
-          <div class="slide-media">
-            <div class="slide-media-wrap">
-              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900" alt="SaaS LaunchPad" class="slide-img" />
-              <div class="slide-floating-tag">💾 Save 200+ Hours Coding</div>
+            <h2 class="slide-product-name">SaaS LaunchPad — Next.js 14 Full-Stack Starter Kit (PayPal + Stripe)</h2>
+            <div class="slide-action-row" onclick="event.stopPropagation()">
+              <div class="slide-price-tag">
+                <span class="slide-price-current">$199</span>
+                <span class="slide-price-old">$999</span>
+              </div>
+              <a href="product.html?id=saas-launchpad" class="slide-btn-buy">Buy Now ⚡</a>
+              <a href="product.html?id=saas-launchpad" class="slide-btn-details">Product Details ➔</a>
             </div>
           </div>
         </div>
 
         <!-- Slide 4: Cinematic LUTs & SFX -->
-        <div class="slider-slide">
-          <div class="slide-info">
-            <span class="slide-category">🎬 Hollywood Video Color Grading</span>
-            <h2 class="slide-title">Cinematic LUTs & Sound Library (2,500+ Assets)</h2>
-            <p class="slide-desc">Transform raw camera footage into rich, moody Hollywood color grades in 1 click. Includes 500+ handcrafted color presets + 2,500+ uncompressed whooshes, risers, and impact SFX.</p>
-            <div class="slide-rating">★★★★★ <span>4.9 (1,940 Reviews)</span></div>
-            <div class="slide-price-wrap">
-              <span class="slide-current-price">$49</span>
-              <span class="slide-old-price">$299</span>
-              <span class="slide-discount-badge">-85% OFF</span>
+        <div class="slider-slide" onclick="window.location.href='product.html?id=luts-pack'">
+          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1400" alt="Cinematic LUTs" class="slide-bg-img" />
+          <div class="slide-gradient-overlay"></div>
+          <div class="slide-content-bottom">
+            <div class="slide-tag-row">
+              <span class="slide-cat-badge">🎬 Video Editing Presets</span>
+              <span class="slide-discount-tag">-85% OFF</span>
+              <span class="slide-rating-stars">★★★★★ 4.9 (1,940 Reviews)</span>
             </div>
-            <div class="slide-actions">
-              <a href="product.html?id=luts-pack" class="slide-btn-primary">View Product Details ➔</a>
-              <button class="slide-btn-secondary" onclick="addToCart('Cinematic LUTs & SFX Pack', 49)">Add to Cart 🛒</button>
-            </div>
-          </div>
-          <div class="slide-media">
-            <div class="slide-media-wrap">
-              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900" alt="Cinematic LUTs" class="slide-img" />
-              <div class="slide-floating-tag">📦 Instant 1-Click Download</div>
+            <h2 class="slide-product-name">Cinematic LUTs & Sound Library (2,500+ Assets for Premiere & CapCut)</h2>
+            <div class="slide-action-row" onclick="event.stopPropagation()">
+              <div class="slide-price-tag">
+                <span class="slide-price-current">$49</span>
+                <span class="slide-price-old">$299</span>
+              </div>
+              <a href="product.html?id=luts-pack" class="slide-btn-buy">Buy Now ⚡</a>
+              <a href="product.html?id=luts-pack" class="slide-btn-details">Product Details ➔</a>
             </div>
           </div>
         </div>
@@ -1350,7 +1342,7 @@
 
   <script>
     
-    // AUTO-PLAYING TRENDING SLIDER LOGIC
+    // AUTO-PLAYING & DRAGGABLE TRENDING SLIDER LOGIC
     let currentTrendingSlide = 0;
     const totalTrendingSlides = 4;
     let trendingInterval = null;
@@ -1390,7 +1382,7 @@
     function startTrendingAutoPlay() {
       trendingInterval = setInterval(() => {
         moveTrendingSlide(1);
-      }, 4500); // Slides every 4.5 seconds
+      }, 4500);
     }
 
     function resetTrendingAutoPlay() {
@@ -1401,7 +1393,7 @@
     // Start auto-play when page loads
     startTrendingAutoPlay();
 
-    // Pause slider when mouse hovers over it
+    // Pause slider on hover
     const sliderContainer = document.getElementById('trendingSlider');
     if (sliderContainer) {
       sliderContainer.addEventListener('mouseenter', () => {
@@ -1410,6 +1402,51 @@
       sliderContainer.addEventListener('mouseleave', () => {
         startTrendingAutoPlay();
       });
+
+      // MOUSE DRAG & TOUCH SWIPE SUPPORT
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      sliderContainer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        if (trendingInterval) clearInterval(trendingInterval);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        currentX = e.clientX;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diffX = currentX - startX;
+        if (diffX > 50) {
+          moveTrendingSlide(-1); // Swiped right -> go to previous
+        } else if (diffX < -50) {
+          moveTrendingSlide(1);  // Swiped left -> go to next
+        }
+        startTrendingAutoPlay();
+      });
+
+      // Touch events for mobile phones/tablets
+      sliderContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        if (trendingInterval) clearInterval(trendingInterval);
+      }, { passive: true });
+
+      sliderContainer.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diffX = endX - startX;
+        if (diffX > 50) {
+          moveTrendingSlide(-1);
+        } else if (diffX < -50) {
+          moveTrendingSlide(1);
+        }
+        startTrendingAutoPlay();
+      }, { passive: true });
     }
 
     let cart = [];
