@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="pageTitle">Product Details — NEXUSDigital</title>
+  <title id="pageTitle">Product Details — DigiStoreX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@
 
   <header>
     <div class="nav-wrap">
-      <a href="index.html" class="logo">NEXUS<span>Digital</span></a>
+      <a href="index.html" class="logo">DigiStore<span>X</span></a>
       <a href="index.html" class="back-btn">← Back to Marketplace</a>
     </div>
   </header>
@@ -552,7 +552,7 @@
     const prod = products[productId] || products["luts-pack"]; // Fallback to first product if not found
 
     // RENDER PRODUCT CONTENT DYNAMICALLY
-    document.getElementById('pageTitle').innerText = prod.title + ' — NEXUSDigital';
+    document.getElementById('pageTitle').innerText = prod.title + ' — DigiStoreX';
     document.getElementById('productTitle').innerText = prod.title;
     document.getElementById('productCat').innerText = prod.category;
     document.getElementById('productPrice').innerText = '$' + prod.price;
@@ -605,7 +605,7 @@
               amount: {
                 value: prod.price.toString()
               },
-              description: 'NEXUSDigital: ' + prod.title
+              description: 'DigiStoreX: ' + prod.title
             }]
           });
         },
