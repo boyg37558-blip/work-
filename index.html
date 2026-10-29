@@ -389,349 +389,604 @@
       .cart-drawer { width: 100%; right: -100%; }
     }
   
-    /* ==========================================
-       MANUAL-ONLY TRENDING SLIDER (USER CONTROLLED)
-    ========================================== */
-    .trending-slider-wrapper {
+    /* =========================================================
+       ANIWAVE DESIGN SYSTEM (EXACT MATCH TO USER SCREENSHOT)
+    ========================================================= */
+    :root {
+      --ani-purple: #8b5cf6;
+      --ani-purple-dark: #6d28d9;
+      --ani-purple-glow: rgba(139, 92, 246, 0.45);
+      --ani-bg-box: #0d111d;
+      --ani-border: #1f273d;
+      --ani-badge-bg: rgba(255, 255, 255, 0.08);
+    }
+
+    /* 1. HERO SLIDER (ANIWAVE STYLE) */
+    .aniwave-hero-slider {
       position: relative;
-      margin-bottom: 45px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #131722 0%, #0c0f17 100%);
-      border: 1px solid #2a3142;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.1);
+      margin-bottom: 25px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0d111d 0%, #070910 100%);
+      border: 1px solid var(--ani-border);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
       overflow: hidden;
       user-select: none;
-      cursor: grab;
-    }
-    .trending-slider-wrapper:active {
-      cursor: grabbing;
     }
 
-    /* TOP HEADER BAR INSIDE SLIDER */
-    .trending-header-bar {
-      position: relative;
-      z-index: 10;
+    .aniwave-slider-track {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 25px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(10, 12, 16, 0.6);
-      backdrop-filter: blur(8px);
-    }
-
-    .trending-badge-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid var(--accent-orange);
-      color: var(--accent-orange);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 6px 14px;
-      border-radius: 30px;
-    }
-
-    .trending-badge-top span.pulse-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--accent-orange);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-orange);
-    }
-
-    /* PROMINENT TOP-RIGHT NAVIGATION CONTROLS */
-    .slider-manual-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .slider-counter-badge {
-      background: #181d26;
-      border: 1px solid #2a3142;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 6px 14px;
-      border-radius: 20px;
-      letter-spacing: 1px;
-    }
-
-    .slider-nav-btn {
-      background: #1f2533;
-      border: 1px solid #3b445a;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 8px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .slider-nav-btn:hover {
-      background: var(--accent-orange);
-      color: #000;
-      border-color: var(--accent-orange);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-    }
-
-    /* TRACK & SLIDES */
-    .slider-track {
-      display: flex;
-      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
       width: 100%;
     }
 
-    .slider-slide {
+    .aniwave-slide {
       min-width: 100%;
       box-sizing: border-box;
-      padding: 35px 35px 30px;
       display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: 35px;
+      grid-template-columns: 1.1fr 1fr;
       align-items: center;
-      cursor: pointer;
-    }
-
-    /* LEFT SIDE: PHOTO */
-    .slide-photo-side {
+      min-height: 440px;
       position: relative;
-      width: 100%;
-      height: 310px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid #2a3142;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-      background: #181d26;
     }
 
-    .slide-photo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .slider-slide:hover .slide-photo-img {
-      transform: scale(1.04);
-    }
-
-    .slide-photo-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #ef4444;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    /* RIGHT SIDE: PRODUCT NAME & BUY BUTTON */
-    .slide-buy-side {
+    /* Left Text Content */
+    .aniwave-slide-content {
+      padding: 45px 40px 40px 45px;
+      z-index: 5;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 16px;
-      z-index: 2;
     }
 
-    .slide-meta-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .slide-cat-tag {
-      color: var(--accent-orange);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .slide-rating-tag {
-      color: #fbbf24;
-      font-size: 13px;
-    }
-
-    /* PRODUCT NAME DIRECTLY ABOVE BUY BUTTON */
-    .slide-name-title {
-      font-size: 26px;
+    .aniwave-slide-title {
+      font-size: 34px;
       font-weight: 800;
       color: #ffffff;
-      line-height: 1.3;
-      margin: 0;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
     }
 
-    .slide-price-box {
+    .aniwave-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .aniwave-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .aniwave-badge.hot {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+
+    .aniwave-badge.purple {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: var(--ani-purple);
+      color: #c4b5fd;
+    }
+
+    .aniwave-badge.rating {
+      color: #facc15;
+      border-color: rgba(250, 204, 21, 0.3);
+      background: rgba(250, 204, 21, 0.1);
+    }
+
+    .aniwave-slide-desc {
+      font-size: 14.5px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 500px;
+    }
+
+    .aniwave-price-tag-row {
       display: flex;
       align-items: baseline;
       gap: 12px;
-      margin-top: 2px;
+      margin-bottom: 22px;
     }
 
-    .slide-current-val {
-      font-size: 34px;
+    .aniwave-current-price {
+      font-size: 32px;
       font-weight: 800;
-      color: var(--accent-orange);
+      color: #ffffff;
     }
 
-    .slide-old-val {
+    .aniwave-old-price {
       font-size: 18px;
-      color: #9ca3af;
+      color: #64748b;
       text-decoration: line-through;
     }
 
-    /* BUY BUTTON & DETAILS BUTTON */
-    .slide-buttons-row {
+    .aniwave-discount-pill {
+      background: #10b981;
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .aniwave-actions-row {
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin-top: 6px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
-    .slide-btn-buy-now {
-      background: var(--accent-orange);
-      color: #000;
+    /* Vibrant Purple Aniwave CTA Button */
+    .aniwave-btn-play {
+      background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+      color: #ffffff;
       font-weight: 800;
-      font-size: 16px;
-      padding: 14px 32px;
-      border-radius: 10px;
+      font-size: 15px;
+      padding: 13px 30px;
+      border-radius: 30px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+      gap: 9px;
+      box-shadow: 0 8px 25px var(--ani-purple-glow);
+      transition: all 0.25s ease;
       border: none;
       cursor: pointer;
     }
 
-    .slide-btn-buy-now:hover {
-      background: var(--accent-hover);
+    .aniwave-btn-play:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
+      box-shadow: 0 12px 30px rgba(139, 92, 246, 0.65);
+      background: linear-gradient(135deg, #9d74f8 0%, #7c3aed 100%);
+      color: #fff;
     }
 
-    .slide-btn-view-details {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
+    .aniwave-btn-details {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
       font-weight: 700;
-      font-size: 15px;
-      padding: 14px 24px;
-      border-radius: 10px;
+      font-size: 14px;
+      padding: 13px 22px;
+      border-radius: 30px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
       transition: all 0.2s ease;
       backdrop-filter: blur(8px);
     }
 
-    .slide-btn-view-details:hover {
-      background: rgba(255, 255, 255, 0.2);
+    .aniwave-btn-details:hover {
+      background: rgba(255, 255, 255, 0.16);
       color: #fff;
     }
 
-    /* BIG FLOATING SIDE ARROWS */
-    .slider-side-arrow {
-      position: absolute;
-      top: 55%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
+    /* Bottom Pagination Dots (Aniwave Style) */
+    .aniwave-dots-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 26px;
+    }
+
+    .aniwave-dot {
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: rgba(18, 23, 33, 0.9);
-      border: 2px solid var(--accent-orange);
-      color: var(--accent-orange);
-      font-size: 22px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+
+    .aniwave-dot:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .aniwave-dot.active {
+      width: 26px;
+      border-radius: 10px;
+      background: var(--ani-purple);
+      box-shadow: 0 0 10px var(--ani-purple);
+    }
+
+    /* Right Cinematic Artwork */
+    .aniwave-slide-visual {
+      position: relative;
+      height: 100%;
+      min-height: 440px;
+      overflow: hidden;
+    }
+
+    .aniwave-visual-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .aniwave-slide:hover .aniwave-visual-img {
+      transform: scale(1.03);
+    }
+
+    /* Soft Gradient Blend into Left Background */
+    .aniwave-visual-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(to right, #0d111d 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .aniwave-visual-mask-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      background: linear-gradient(to top, #070910 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Floating Arrow Navigation */
+    .aniwave-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(13, 17, 29, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 20;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
     }
 
-    .slider-side-arrow:hover {
-      background: var(--accent-orange);
-      color: #000;
-      transform: translateY(-50%) scale(1.15);
-      box-shadow: 0 6px 25px rgba(245, 158, 11, 0.6);
+    .aniwave-arrow-btn:hover {
+      background: var(--ani-purple);
+      border-color: var(--ani-purple);
+      color: #fff;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 20px var(--ani-purple-glow);
     }
 
-    .slider-side-arrow.prev { left: 15px; }
-    .slider-side-arrow.next { right: 15px; }
+    .aniwave-arrow-btn.prev { left: 16px; }
+    .aniwave-arrow-btn.next { right: 16px; }
 
-    /* BOTTOM NUMBERED TABS FOR QUICK JUMP */
-    .slider-bottom-tabs {
+    /* 2. ANIWAVE SOCIAL SHARE / NOTICE BAR (EXACT SCREENSHOT MATCH) */
+    .aniwave-share-bar {
+      background: #0f1322;
+      border: 1px solid var(--ani-border);
+      border-radius: 12px;
+      padding: 16px 22px;
+      margin-bottom: 35px;
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 20px 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(10, 12, 16, 0.4);
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .aniwave-share-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
       flex-wrap: wrap;
     }
 
-    .slider-tab-pill {
-      background: #181d26;
-      border: 1px solid #2a3142;
-      color: #9ca3af;
+    .aniwave-share-msg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5e1;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .aniwave-share-msg span.info-icon {
+      color: var(--ani-purple);
+      font-size: 16px;
+    }
+
+    .aniwave-share-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .aniwave-shares-count {
+      color: #94a3b8;
       font-size: 12px;
       font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 20px;
+      margin-right: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .share-btn:hover { transform: translateY(-2px); opacity: 0.95; color: #fff; }
+
+    .share-btn.fb { background: #1877f2; }
+    .share-btn.x { background: #000000; border: 1px solid #334155; }
+    .share-btn.messenger { background: #0084ff; }
+    .share-btn.reddit { background: #ff4500; }
+    .share-btn.whatsapp { background: #25d366; }
+    .share-btn.telegram { background: #0088cc; }
+
+    .aniwave-share-bottom-sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+      color: #94a3b8;
+      flex-wrap: wrap;
+    }
+
+    .aniwave-sub-badge-lite {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid var(--ani-purple);
+      color: #c4b5fd;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* 3. 2-COLUMN LAYOUT: MAIN CATALOG + TRENDING LEADERBOARD SIDEBAR */
+    .aniwave-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .aniwave-catalog-column {
+      min-width: 0;
+    }
+
+    /* ANIWAVE "TOP ANIME" STYLE TRENDING WIDGET */
+    .aniwave-trending-sidebar {
+      position: sticky;
+      top: 90px;
+      background: #0f1322;
+      border: 1px solid var(--ani-border);
+      border-radius: 16px;
+      padding: 20px 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .trending-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .trending-widget-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trending-filter-tabs {
+      display: flex;
+      background: #181d2e;
+      padding: 3px;
+      border-radius: 8px;
+      gap: 2px;
+    }
+
+    .trending-tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .trending-tab-btn:hover { color: #fff; }
+
+    .trending-tab-btn.active {
+      background: var(--ani-purple);
+      color: #ffffff;
+      box-shadow: 0 2px 8px var(--ani-purple-glow);
+    }
+
+    /* RANKED LIST ITEMS */
+    .trending-rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .trending-rank-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      text-decoration: none;
       transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .trending-rank-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateX(4px);
+    }
+
+    /* Big Hollow Neon Outline Number (Aniwave Style) */
+    .rank-number {
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+      min-width: 28px;
+      text-align: center;
+      color: transparent;
+      -webkit-text-stroke: 1.5px #64748b;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .trending-rank-item:nth-child(1) .rank-number {
+      -webkit-text-stroke: 2px var(--ani-purple);
+      text-shadow: 0 0 12px var(--ani-purple);
+    }
+
+    .trending-rank-item:nth-child(2) .rank-number {
+      -webkit-text-stroke: 1.8px #a855f7;
+    }
+
+    .trending-rank-item:nth-child(3) .rank-number {
+      -webkit-text-stroke: 1.8px #38bdf8;
+    }
+
+    .rank-thumb-box {
+      width: 58px;
+      height: 72px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #1e2436;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .rank-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .rank-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rank-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .trending-rank-item:hover .rank-title {
+      color: #c4b5fd;
+    }
+
+    .rank-meta-row {
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
     }
 
-    .slider-tab-pill:hover {
-      background: #242c3b;
-      color: #fff;
-      border-color: #4b5563;
-    }
-
-    .slider-tab-pill.active {
-      background: var(--accent-orange);
-      color: #000;
+    .rank-price-pill {
+      background: rgba(16, 185, 129, 0.18);
+      color: #10b981;
+      font-size: 11px;
       font-weight: 800;
-      border-color: var(--accent-orange);
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
-    @media (max-width: 850px) {
-      .trending-header-bar { padding: 14px 18px; }
-      .slider-slide {
-        grid-template-columns: 1fr;
-        padding: 25px 18px 20px;
-        gap: 20px;
-      }
-      .slide-photo-side { height: 220px; }
-      .slide-name-title { font-size: 20px; }
-      .slide-current-val { font-size: 26px; }
-      .slider-side-arrow { display: none; }
-      .slider-tab-pill { font-size: 11px; padding: 6px 12px; }
+    .rank-tag-pill {
+      background: rgba(255, 255, 255, 0.06);
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
     }
+
+    /* RESPONSIVE MEDIA QUERIES */
+    @media (max-width: 1080px) {
+      .aniwave-content-grid {
+        grid-template-columns: 1fr;
+      }
+      .aniwave-trending-sidebar {
+        position: static;
+        margin-top: 40px;
+      }
+      .aniwave-slide {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .aniwave-slide-content {
+        padding: 30px 24px;
+      }
+      .aniwave-slide-title {
+        font-size: 26px;
+      }
+      .aniwave-slide-visual {
+        min-height: 260px;
+        height: 260px;
+      }
+      .aniwave-visual-mask {
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(to bottom, #0d111d 0%, transparent 100%);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -802,142 +1057,197 @@
     </div>
 
     
-    <!-- HERO TRENDING SLIDER (100% USER CONTROLLED - NO AUTO-ROTATION) -->
-    <section class="trending-slider-wrapper" id="trendingSlider">
+    
+    <!-- HERO TRENDING SLIDER (ANIWAVE DESIGN - 100% USER CONTROLLED) -->
+    <section class="aniwave-hero-slider" id="aniwaveHeroSlider">
       
-      <!-- TOP HEADER BAR WITH CLEAR VISIBLE CONTROLS -->
-      <div class="trending-header-bar">
-        <div class="trending-badge-top">
-          <span class="pulse-dot"></span>
-          🔥 Trending Best Sellers
-        </div>
+      <!-- Big Floating Side Arrows -->
+      <button class="aniwave-arrow-btn prev" onclick="moveAniwaveSlide(-1)" aria-label="Previous Slide">❮</button>
+      <button class="aniwave-arrow-btn next" onclick="moveAniwaveSlide(1)" aria-label="Next Slide">❯</button>
+
+      <div class="aniwave-slider-track" id="aniwaveTrack">
         
-        <!-- PROMINENT NAVIGATION BUTTONS & COUNTER -->
-        <div class="slider-manual-controls">
-          <button class="slider-nav-btn" onclick="moveTrendingSlide(-1)" title="Previous Product">❮ Previous</button>
-          <span class="slider-counter-badge" id="sliderCounter">1 / 4</span>
-          <button class="slider-nav-btn" onclick="moveTrendingSlide(1)" title="Next Product">Next ❯</button>
-        </div>
-      </div>
-
-      <!-- BIG SIDE ARROWS FOR INSTANT CLICKING -->
-      <button class="slider-side-arrow prev" onclick="moveTrendingSlide(-1)" aria-label="Previous Slide">❮</button>
-      <button class="slider-side-arrow next" onclick="moveTrendingSlide(1)" aria-label="Next Slide">❯</button>
-
-      <div class="slider-track" id="trendingTrack">
-        
-        <!-- Slide 1: LeadGen Pro -->
-        <div class="slider-slide" onclick="window.location.href='product.html?id=leadgen-pro'">
-          <!-- Photo on Left -->
-          <div class="slide-photo-side">
-            <span class="slide-photo-badge">-80% OFF</span>
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900" alt="LeadGen Pro Software" class="slide-photo-img" />
+        <!-- Slide 1: AutoReels AI -->
+        <div class="aniwave-slide">
+          <div class="aniwave-slide-content">
+            <h1 class="aniwave-slide-title">AutoReels AI — Faceless Video Factory</h1>
+            <div class="aniwave-badge-row">
+              <span class="aniwave-badge hot">🔥 TOP SELLER</span>
+              <span class="aniwave-badge purple">AI SAAS</span>
+              <span class="aniwave-badge rating">★ 5.0 (2,890)</span>
+              <span class="aniwave-badge">COMMERCIAL</span>
+              <span class="aniwave-badge">INSTANT ACCESS</span>
+            </div>
+            <p class="aniwave-slide-desc">
+              Generate 100+ viral faceless reels, TikToks & YouTube Shorts in 1-click with automated AI voiceovers, dynamic captions, and royalty-free cinematic b-roll.
+            </p>
+            <div class="aniwave-price-tag-row">
+              <span class="aniwave-current-price">$149</span>
+              <span class="aniwave-old-price">$699</span>
+              <span class="aniwave-discount-pill">-78% OFF</span>
+            </div>
+            <div class="aniwave-actions-row">
+              <a href="product.html?id=autoreels-ai" class="aniwave-btn-play">▶ BUY NOW - $149</a>
+              <a href="product.html?id=autoreels-ai" class="aniwave-btn-details">ℹ️ View Details</a>
+            </div>
+            <div class="aniwave-dots-row">
+              <button class="aniwave-dot active" onclick="jumpAniwaveSlide(0)" title="Slide 1"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(1)" title="Slide 2"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(2)" title="Slide 3"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(3)" title="Slide 4"></button>
+            </div>
           </div>
-          <!-- Buy Button & Product Name on Right -->
-          <div class="slide-buy-side">
-            <div class="slide-meta-row">
-              <span class="slide-cat-tag">⚡ B2B Automation Software</span>
-              <span class="slide-rating-tag">★★★★★ 4.9 (1,420 Reviews)</span>
-            </div>
-            <h2 class="slide-name-title">LeadGen Pro — Automated B2B Lead Scraper & Cold Outreach Engine</h2>
-            <div class="slide-price-box">
-              <span class="slide-current-val">$99</span>
-              <span class="slide-old-val">$499</span>
-            </div>
-            <div class="slide-buttons-row" onclick="event.stopPropagation()">
-              <a href="product.html?id=leadgen-pro" class="slide-btn-buy-now">Buy Now ⚡</a>
-              <a href="product.html?id=leadgen-pro" class="slide-btn-view-details">Product Details ➔</a>
-            </div>
+          <div class="aniwave-slide-visual">
+            <div class="aniwave-visual-mask"></div>
+            <div class="aniwave-visual-mask-bottom"></div>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200" alt="AutoReels AI" class="aniwave-visual-img" />
           </div>
         </div>
 
-        <!-- Slide 2: AutoReels AI -->
-        <div class="slider-slide" onclick="window.location.href='product.html?id=autoreels-ai'">
-          <!-- Photo on Left -->
-          <div class="slide-photo-side">
-            <span class="slide-photo-badge">-78% OFF</span>
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900" alt="AutoReels AI Software" class="slide-photo-img" />
+        <!-- Slide 2: LeadGen Pro -->
+        <div class="aniwave-slide">
+          <div class="aniwave-slide-content">
+            <h1 class="aniwave-slide-title">LeadGen Pro Suite — B2B Scraper</h1>
+            <div class="aniwave-badge-row">
+              <span class="aniwave-badge hot">⚡ HIGH CONVERTING</span>
+              <span class="aniwave-badge purple">B2B ENGINE</span>
+              <span class="aniwave-badge rating">★ 4.9 (1,420)</span>
+              <span class="aniwave-badge">UNLIMITED EXPORTS</span>
+            </div>
+            <p class="aniwave-slide-desc">
+              Automate verified B2B lead generation. Scrape decision-makers, direct mobile dials, and valid business emails with built-in cold email sequences.
+            </p>
+            <div class="aniwave-price-tag-row">
+              <span class="aniwave-current-price">$99</span>
+              <span class="aniwave-old-price">$499</span>
+              <span class="aniwave-discount-pill">-80% OFF</span>
+            </div>
+            <div class="aniwave-actions-row">
+              <a href="product.html?id=leadgen-pro" class="aniwave-btn-play">▶ BUY NOW - $99</a>
+              <a href="product.html?id=leadgen-pro" class="aniwave-btn-details">ℹ️ View Details</a>
+            </div>
+            <div class="aniwave-dots-row">
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(0)" title="Slide 1"></button>
+              <button class="aniwave-dot active" onclick="jumpAniwaveSlide(1)" title="Slide 2"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(2)" title="Slide 3"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(3)" title="Slide 4"></button>
+            </div>
           </div>
-          <!-- Buy Button & Product Name on Right -->
-          <div class="slide-buy-side">
-            <div class="slide-meta-row">
-              <span class="slide-cat-tag">🤖 AI Video Automation</span>
-              <span class="slide-rating-tag">★★★★★ 5.0 (2,890 Reviews)</span>
-            </div>
-            <h2 class="slide-name-title">AutoReels AI — Faceless Video Generator & Social Media Auto-Poster</h2>
-            <div class="slide-price-box">
-              <span class="slide-current-val">$149</span>
-              <span class="slide-old-val">$699</span>
-            </div>
-            <div class="slide-buttons-row" onclick="event.stopPropagation()">
-              <a href="product.html?id=autoreels-ai" class="slide-btn-buy-now">Buy Now ⚡</a>
-              <a href="product.html?id=autoreels-ai" class="slide-btn-view-details">Product Details ➔</a>
-            </div>
+          <div class="aniwave-slide-visual">
+            <div class="aniwave-visual-mask"></div>
+            <div class="aniwave-visual-mask-bottom"></div>
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200" alt="LeadGen Pro Software" class="aniwave-visual-img" />
           </div>
         </div>
 
         <!-- Slide 3: SaaS LaunchPad -->
-        <div class="slider-slide" onclick="window.location.href='product.html?id=saas-launchpad'">
-          <!-- Photo on Left -->
-          <div class="slide-photo-side">
-            <span class="slide-photo-badge">-80% OFF</span>
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900" alt="SaaS LaunchPad" class="slide-photo-img" />
+        <div class="aniwave-slide">
+          <div class="aniwave-slide-content">
+            <h1 class="aniwave-slide-title">SaaS LaunchPad — Next.js 14 Boilerplate</h1>
+            <div class="aniwave-badge-row">
+              <span class="aniwave-badge hot">🚀 FULL STACK</span>
+              <span class="aniwave-badge purple">PAYPAL + STRIPE</span>
+              <span class="aniwave-badge rating">★ 4.9 (3,110)</span>
+              <span class="aniwave-badge">PRODUCTION READY</span>
+            </div>
+            <p class="aniwave-slide-desc">
+              Ship production-ready SaaS in 48 hours. Includes pre-configured PayPal & Stripe payments, authentication, admin dashboard, and modern landing page.
+            </p>
+            <div class="aniwave-price-tag-row">
+              <span class="aniwave-current-price">$199</span>
+              <span class="aniwave-old-price">$999</span>
+              <span class="aniwave-discount-pill">-80% OFF</span>
+            </div>
+            <div class="aniwave-actions-row">
+              <a href="product.html?id=saas-launchpad" class="aniwave-btn-play">▶ BUY NOW - $199</a>
+              <a href="product.html?id=saas-launchpad" class="aniwave-btn-details">ℹ️ View Details</a>
+            </div>
+            <div class="aniwave-dots-row">
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(0)" title="Slide 1"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(1)" title="Slide 2"></button>
+              <button class="aniwave-dot active" onclick="jumpAniwaveSlide(2)" title="Slide 3"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(3)" title="Slide 4"></button>
+            </div>
           </div>
-          <!-- Buy Button & Product Name on Right -->
-          <div class="slide-buy-side">
-            <div class="slide-meta-row">
-              <span class="slide-cat-tag">💻 Next.js 14 Developer Kit</span>
-              <span class="slide-rating-tag">★★★★★ 4.9 (3,110 Reviews)</span>
-            </div>
-            <h2 class="slide-name-title">SaaS LaunchPad — Next.js 14 Full-Stack Boilerplate (PayPal + Stripe)</h2>
-            <div class="slide-price-box">
-              <span class="slide-current-val">$199</span>
-              <span class="slide-old-val">$999</span>
-            </div>
-            <div class="slide-buttons-row" onclick="event.stopPropagation()">
-              <a href="product.html?id=saas-launchpad" class="slide-btn-buy-now">Buy Now ⚡</a>
-              <a href="product.html?id=saas-launchpad" class="slide-btn-view-details">Product Details ➔</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 4: Cinematic LUTs & SFX -->
-        <div class="slider-slide" onclick="window.location.href='product.html?id=luts-pack'">
-          <!-- Photo on Left -->
-          <div class="slide-photo-side">
-            <span class="slide-photo-badge">-85% OFF</span>
-            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900" alt="Cinematic LUTs" class="slide-photo-img" />
-          </div>
-          <!-- Buy Button & Product Name on Right -->
-          <div class="slide-buy-side">
-            <div class="slide-meta-row">
-              <span class="slide-cat-tag">🎬 Video Editing Presets</span>
-              <span class="slide-rating-tag">★★★★★ 4.9 (1,940 Reviews)</span>
-            </div>
-            <h2 class="slide-name-title">Cinematic LUTs & Sound Library (2,500+ Assets for Premiere & CapCut)</h2>
-            <div class="slide-price-box">
-              <span class="slide-current-val">$49</span>
-              <span class="slide-old-val">$299</span>
-            </div>
-            <div class="slide-buttons-row" onclick="event.stopPropagation()">
-              <a href="product.html?id=luts-pack" class="slide-btn-buy-now">Buy Now ⚡</a>
-              <a href="product.html?id=luts-pack" class="slide-btn-view-details">Product Details ➔</a>
-            </div>
+          <div class="aniwave-slide-visual">
+            <div class="aniwave-visual-mask"></div>
+            <div class="aniwave-visual-mask-bottom"></div>
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200" alt="SaaS LaunchPad" class="aniwave-visual-img" />
           </div>
         </div>
 
-      </div>
+        <!-- Slide 4: Cinematic LUTs -->
+        <div class="aniwave-slide">
+          <div class="aniwave-slide-content">
+            <h1 class="aniwave-slide-title">Cinematic LUTs & Sound Library</h1>
+            <div class="aniwave-badge-row">
+              <span class="aniwave-badge hot">🎬 2,500+ ASSETS</span>
+              <span class="aniwave-badge purple">PREMIERE & CAPCUT</span>
+              <span class="aniwave-badge rating">★ 4.9 (1,940)</span>
+              <span class="aniwave-badge">4K / 8K READY</span>
+            </div>
+            <p class="aniwave-slide-desc">
+              Hollywood-grade cinematic color presets and 10,000+ lossless sound effects. Used by top creators on YouTube, TikTok, and commercial cinema.
+            </p>
+            <div class="aniwave-price-tag-row">
+              <span class="aniwave-current-price">$49</span>
+              <span class="aniwave-old-price">$299</span>
+              <span class="aniwave-discount-pill">-85% OFF</span>
+            </div>
+            <div class="aniwave-actions-row">
+              <a href="product.html?id=luts-pack" class="aniwave-btn-play">▶ BUY NOW - $49</a>
+              <a href="product.html?id=luts-pack" class="aniwave-btn-details">ℹ️ View Details</a>
+            </div>
+            <div class="aniwave-dots-row">
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(0)" title="Slide 1"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(1)" title="Slide 2"></button>
+              <button class="aniwave-dot" onclick="jumpAniwaveSlide(2)" title="Slide 3"></button>
+              <button class="aniwave-dot active" onclick="jumpAniwaveSlide(3)" title="Slide 4"></button>
+            </div>
+          </div>
+          <div class="aniwave-slide-visual">
+            <div class="aniwave-visual-mask"></div>
+            <div class="aniwave-visual-mask-bottom"></div>
+            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200" alt="Cinematic LUTs" class="aniwave-visual-img" />
+          </div>
+        </div>
 
-      <!-- BOTTOM TABS FOR 1-CLICK JUMP TO ANY PRODUCT -->
-      <div class="slider-bottom-tabs" id="trendingTabs">
-        <button class="slider-tab-pill active" onclick="jumpTrendingSlide(0)">1. LeadGen Pro ($99)</button>
-        <button class="slider-tab-pill" onclick="jumpTrendingSlide(1)">2. AutoReels AI ($149)</button>
-        <button class="slider-tab-pill" onclick="jumpTrendingSlide(2)">3. SaaS LaunchPad ($199)</button>
-        <button class="slider-tab-pill" onclick="jumpTrendingSlide(3)">4. Cinematic LUTs ($49)</button>
       </div>
     </section>
 
-    <!-- 01: VIDEO EDITING & VFX -->
+    <!-- 2. ANIWAVE SOCIAL SHARE / NOTICE BAR (EXACT SCREENSHOT MATCH) -->
+    <div class="aniwave-share-bar">
+      <div class="aniwave-share-top-row">
+        <div class="aniwave-share-msg">
+          <span class="info-icon">ℹ️</span>
+          If you enjoy NEXUSDigital, please consider sharing it with your fellow creators & entrepreneurs. Thank you!
+        </div>
+        <div class="aniwave-share-buttons">
+          <span class="aniwave-shares-count">🔥 85.3k Shares</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://boyg37558-blip.github.io/work-/" target="_blank" class="share-btn fb">Facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=Check%20out%20NEXUSDigital%20for%20top%20software,%20AI%20tools%20and%20digital%20assets!&url=https://boyg37558-blip.github.io/work-/" target="_blank" class="share-btn x">𝕏 Post</a>
+          <a href="https://www.reddit.com/submit?url=https://boyg37558-blip.github.io/work-/&title=Best%20Digital%20Products%20and%20SaaS%20Tools" target="_blank" class="share-btn reddit">Reddit</a>
+          <a href="https://api.whatsapp.com/send?text=Hey!%20Check%20out%20these%20awesome%20digital%20tools%20and%20software:%20https://boyg37558-blip.github.io/work-/" target="_blank" class="share-btn whatsapp">WhatsApp</a>
+          <a href="https://t.me/share/url?url=https://boyg37558-blip.github.io/work-/&text=High-ticket%20software%20and%20AI%20tools" target="_blank" class="share-btn telegram">Telegram</a>
+        </div>
+      </div>
+      <div class="aniwave-share-bottom-sub">
+        <div>
+          ⚡ Fast UI? Instant Digital Downloads <span class="aniwave-sub-badge-lite">⚡ NEXUS Lite</span>
+        </div>
+        <div>
+          🔒 100% Secure Checkout via PayPal & Stripe &nbsp;|&nbsp; 30-Day Money-Back Guarantee
+        </div>
+      </div>
+    </div>
+
+
+    
+    <!-- 3. ANIWAVE 2-COLUMN LAYOUT (CATALOG + TRENDING LEADERBOARD) -->
+    <div class="aniwave-content-grid">
+      <div class="aniwave-catalog-column">
+        <!-- 01: VIDEO EDITING & VFX -->
+        
     <section class="category-block" id="video-section" data-category="video">
       <div class="section-header">
         <div class="section-title-wrap">
@@ -1390,7 +1700,28 @@
     </section>
 
 
-  </main>
+  
+      </div>
+      
+      <!-- ANIWAVE "TOP ANIME" STYLE TRENDING WIDGET -->
+      <aside class="aniwave-trending-sidebar">
+        <div class="trending-widget-header">
+          <h3 class="trending-widget-title">🔥 Top Products</h3>
+          <div class="trending-filter-tabs">
+            <button class="trending-tab-btn active" id="btnTabDay" onclick="switchAniwaveTrendingTab('day')">Day</button>
+            <button class="trending-tab-btn" id="btnTabWeek" onclick="switchAniwaveTrendingTab('week')">Week</button>
+            <button class="trending-tab-btn" id="btnTabMonth" onclick="switchAniwaveTrendingTab('month')">Month</button>
+          </div>
+        </div>
+        
+        <div class="trending-rank-list" id="aniwaveTrendingList">
+          <!-- Dynamically populated by switchAniwaveTrendingTab() -->
+        </div>
+      </aside>
+
+    </div>
+    </main>
+  
 
   <!-- CART DRAWER WITH OFFICIAL PAYPAL BUTTONS -->
   <div class="backdrop" id="backdrop" onclick="toggleCart()"></div>
@@ -1420,89 +1751,6 @@
 
   <script>
     
-    // MANUAL-ONLY TRENDING SLIDER LOGIC (100% USER CONTROLLED)
-    let currentTrendingSlide = 0;
-    const totalTrendingSlides = 4;
-
-    function updateTrendingSlider() {
-      const track = document.getElementById('trendingTrack');
-      const counter = document.getElementById('sliderCounter');
-      const pills = document.querySelectorAll('.slider-tab-pill');
-
-      if (track) {
-        track.style.transform = 'translateX(-' + (currentTrendingSlide * 100) + '%)';
-      }
-      if (counter) {
-        counter.innerText = (currentTrendingSlide + 1) + ' / ' + totalTrendingSlides;
-      }
-      pills.forEach((pill, idx) => {
-        if (idx === currentTrendingSlide) {
-          pill.classList.add('active');
-        } else {
-          pill.classList.remove('active');
-        }
-      });
-    }
-
-    function moveTrendingSlide(dir) {
-      currentTrendingSlide += dir;
-      if (currentTrendingSlide >= totalTrendingSlides) {
-        currentTrendingSlide = 0;
-      } else if (currentTrendingSlide < 0) {
-        currentTrendingSlide = totalTrendingSlides - 1;
-      }
-      updateTrendingSlider();
-    }
-
-    function jumpTrendingSlide(idx) {
-      currentTrendingSlide = idx;
-      updateTrendingSlider();
-    }
-
-    // MOUSE DRAG & TOUCH SWIPE SUPPORT
-    const sliderContainer = document.getElementById('trendingSlider');
-    if (sliderContainer) {
-      let startX = 0;
-      let currentX = 0;
-      let isDragging = false;
-
-      sliderContainer.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        currentX = e.clientX;
-      });
-
-      window.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        const diffX = currentX - startX;
-        if (diffX > 50) {
-          moveTrendingSlide(-1); // Swiped right -> go to previous
-        } else if (diffX < -50) {
-          moveTrendingSlide(1);  // Swiped left -> go to next
-        }
-      });
-
-      // Touch events for mobile phones
-      sliderContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-      }, { passive: true });
-
-      sliderContainer.addEventListener('touchend', (e) => {
-        const endX = e.changedTouches[0].clientX;
-        const diffX = endX - startX;
-        if (diffX > 50) {
-          moveTrendingSlide(-1);
-        } else if (diffX < -50) {
-          moveTrendingSlide(1);
-        }
-      }, { passive: true });
-    }
-
     let cart = [];
 
     // CATEGORY & SEARCH FILTERING (INSTANT REAL-TIME)
@@ -1709,6 +1957,236 @@
         }).render('#paypal-button-container');
       }
     }
+  
+    /* =========================================================
+       ANIWAVE HERO SLIDER & TRENDING LEADERBOARD SCRIPT
+    ========================================================= */
+    let currentAniwaveSlide = 0;
+    const totalAniwaveSlides = 4;
+
+    function updateAniwaveSlider() {
+      const track = document.getElementById('aniwaveTrack');
+      if (track) {
+        track.style.transform = 'translateX(-' + (currentAniwaveSlide * 100) + '%)';
+      }
+      // Update dots across all slides
+      const allDotRows = document.querySelectorAll('.aniwave-dots-row');
+      allDotRows.forEach(row => {
+        const dots = row.querySelectorAll('.aniwave-dot');
+        dots.forEach((dot, idx) => {
+          if (idx === currentAniwaveSlide) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      });
+    }
+
+    function moveAniwaveSlide(direction) {
+      currentAniwaveSlide += direction;
+      if (currentAniwaveSlide >= totalAniwaveSlides) {
+        currentAniwaveSlide = 0;
+      } else if (currentAniwaveSlide < 0) {
+        currentAniwaveSlide = totalAniwaveSlides - 1;
+      }
+      updateAniwaveSlider();
+    }
+
+    function jumpAniwaveSlide(index) {
+      currentAniwaveSlide = index;
+      updateAniwaveSlider();
+    }
+
+    // Touch swipe and drag for mobile
+    const heroSliderElem = document.getElementById('aniwaveHeroSlider');
+    if (heroSliderElem) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      heroSliderElem.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      heroSliderElem.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (diff > 50) moveAniwaveSlide(1);
+        else if (diff < -50) moveAniwaveSlide(-1);
+      }, { passive: true });
+    }
+
+    // TOP TRENDING LEADERBOARD DATA (DAY / WEEK / MONTH)
+    const aniwaveTrendingData = {
+      day: [
+        {
+          id: 'leadgen-pro',
+          title: 'LeadGen Pro — Automated B2B Lead Scraper',
+          price: '$99',
+          type: 'Software',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300'
+        },
+        {
+          id: 'autoreels-ai',
+          title: 'AutoReels AI — Faceless Video Generator',
+          price: '$149',
+          type: 'AI Video',
+          rating: '★ 5.0',
+          img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300'
+        },
+        {
+          id: 'saas-launchpad',
+          title: 'SaaS LaunchPad — Next.js 14 Boilerplate',
+          price: '$199',
+          type: 'Codebase',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300'
+        },
+        {
+          id: 'luts-pack',
+          title: 'Cinematic LUTs & Pro Color Grade Pack',
+          price: '$49',
+          type: 'VFX Pack',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300'
+        },
+        {
+          id: 'chatbot-builder',
+          title: 'AI Chatbot & Support Assistant Builder',
+          price: '$89',
+          type: 'Automation',
+          rating: '★ 4.8',
+          img: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=300'
+        }
+      ],
+      week: [
+        {
+          id: 'autoreels-ai',
+          title: 'AutoReels AI — Faceless Video Generator',
+          price: '$149',
+          type: 'AI Video',
+          rating: '★ 5.0',
+          img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300'
+        },
+        {
+          id: 'saas-launchpad',
+          title: 'SaaS LaunchPad — Next.js 14 Boilerplate',
+          price: '$199',
+          type: 'Codebase',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300'
+        },
+        {
+          id: 'leadgen-pro',
+          title: 'LeadGen Pro — Automated B2B Lead Scraper',
+          price: '$99',
+          type: 'Software',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300'
+        },
+        {
+          id: 'pro-marketing-suite',
+          title: 'All-in-One Digital Marketing Agency Suite',
+          price: '$99',
+          type: 'Marketing',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300'
+        },
+        {
+          id: 'graphics-vault',
+          title: '100,000+ Graphic Design Assets Mega Vault',
+          price: '$39',
+          type: 'Graphics',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=300'
+        }
+      ],
+      month: [
+        {
+          id: 'saas-launchpad',
+          title: 'SaaS LaunchPad — Next.js 14 Boilerplate',
+          price: '$199',
+          type: 'Codebase',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300'
+        },
+        {
+          id: 'autoreels-ai',
+          title: 'AutoReels AI — Faceless Video Generator',
+          price: '$149',
+          type: 'AI Video',
+          rating: '★ 5.0',
+          img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300'
+        },
+        {
+          id: 'leadgen-pro',
+          title: 'LeadGen Pro — Automated B2B Lead Scraper',
+          price: '$99',
+          type: 'Software',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300'
+        },
+        {
+          id: 'marketing-mastery',
+          title: 'Digital Marketing Mastery & Ads Course 2026',
+          price: '$79',
+          type: 'Course',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=300'
+        },
+        {
+          id: 'luts-pack',
+          title: 'Cinematic LUTs & Pro Color Grade Pack',
+          price: '$49',
+          type: 'VFX Pack',
+          rating: '★ 4.9',
+          img: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300'
+        }
+      ]
+    };
+
+    function switchAniwaveTrendingTab(tab) {
+      const btnDay = document.getElementById('btnTabDay');
+      const btnWeek = document.getElementById('btnTabWeek');
+      const btnMonth = document.getElementById('btnTabMonth');
+      if (btnDay) btnDay.classList.remove('active');
+      if (btnWeek) btnWeek.classList.remove('active');
+      if (btnMonth) btnMonth.classList.remove('active');
+
+      if (tab === 'day' && btnDay) btnDay.classList.add('active');
+      if (tab === 'week' && btnWeek) btnWeek.classList.add('active');
+      if (tab === 'month' && btnMonth) btnMonth.classList.add('active');
+
+      const items = aniwaveTrendingData[tab] || aniwaveTrendingData.day;
+      const listContainer = document.getElementById('aniwaveTrendingList');
+      if (!listContainer) return;
+
+      listContainer.innerHTML = items.map((item, index) => `
+        <a href="product.html?id=${item.id}" class="trending-rank-item">
+          <div class="rank-number">${index + 1}</div>
+          <div class="rank-thumb-box">
+            <img src="${item.img}" alt="${item.title}" class="rank-thumb-img" />
+          </div>
+          <div class="rank-info">
+            <div class="rank-title" title="${item.title}">${item.title}</div>
+            <div class="rank-meta-row">
+              <span class="rank-price-pill">${item.price}</span>
+              <span class="rank-tag-pill">${item.rating}</span>
+              <span class="rank-tag-pill">${item.type}</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // Initialize Trending Leaderboard on load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        switchAniwaveTrendingTab('day');
+      });
+    } else {
+      switchAniwaveTrendingTab('day');
+    }
+
   </script>
 </body>
 </html>
