@@ -390,13 +390,13 @@
     }
   
     /* ==========================================
-       TRENDING HERO CAROUSEL / SLIDER (PHOTO LEFT, NAME & BUY RIGHT)
+       MANUAL-ONLY TRENDING SLIDER (USER CONTROLLED)
     ========================================== */
     .trending-slider-wrapper {
       position: relative;
       margin-bottom: 45px;
       border-radius: 20px;
-      background: linear-gradient(135deg, #121622 0%, #0c0f17 100%);
+      background: linear-gradient(135deg, #131722 0%, #0c0f17 100%);
       border: 1px solid #2a3142;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.1);
       overflow: hidden;
@@ -407,24 +407,32 @@
       cursor: grabbing;
     }
 
-    .trending-badge-top {
-      position: absolute;
-      top: 18px;
-      left: 24px;
+    /* TOP HEADER BAR INSIDE SLIDER */
+    .trending-header-bar {
+      position: relative;
       z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 12, 16, 0.6);
+      backdrop-filter: blur(8px);
+    }
+
+    .trending-badge-top {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(10, 12, 16, 0.85);
+      background: rgba(245, 158, 11, 0.15);
       border: 1px solid var(--accent-orange);
       color: var(--accent-orange);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 30px;
-      backdrop-filter: blur(8px);
     }
 
     .trending-badge-top span.pulse-dot {
@@ -433,27 +441,62 @@
       background: var(--accent-orange);
       border-radius: 50%;
       box-shadow: 0 0 8px var(--accent-orange);
-      animation: pulseAnim 1.8s infinite;
     }
 
-    @keyframes pulseAnim {
-      0% { transform: scale(0.9); opacity: 0.7; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.7; }
+    /* PROMINENT TOP-RIGHT NAVIGATION CONTROLS */
+    .slider-manual-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
+    .slider-counter-badge {
+      background: #181d26;
+      border: 1px solid #2a3142;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    .slider-nav-btn {
+      background: #1f2533;
+      border: 1px solid #3b445a;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .slider-nav-btn:hover {
+      background: var(--accent-orange);
+      color: #000;
+      border-color: var(--accent-orange);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    }
+
+    /* TRACK & SLIDES */
     .slider-track {
       display: flex;
-      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
       width: 100%;
     }
 
     .slider-slide {
       min-width: 100%;
       box-sizing: border-box;
-      padding: 65px 40px 35px;
+      padding: 35px 35px 30px;
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
+      grid-template-columns: 1fr 1.15fr;
       gap: 35px;
       align-items: center;
       cursor: pointer;
@@ -463,11 +506,11 @@
     .slide-photo-side {
       position: relative;
       width: 100%;
-      height: 320px;
+      height: 310px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid #2a3142;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
       background: #181d26;
     }
 
@@ -475,11 +518,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      transition: transform 0.5s ease;
     }
 
     .slider-slide:hover .slide-photo-img {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
     .slide-photo-badge {
@@ -492,7 +535,7 @@
       font-weight: 800;
       padding: 4px 10px;
       border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 
     /* RIGHT SIDE: PRODUCT NAME & BUY BUTTON */
@@ -526,7 +569,7 @@
 
     /* PRODUCT NAME DIRECTLY ABOVE BUY BUTTON */
     .slide-name-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
       color: #ffffff;
       line-height: 1.3;
@@ -537,18 +580,18 @@
       display: flex;
       align-items: baseline;
       gap: 12px;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .slide-current-val {
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 800;
       color: var(--accent-orange);
     }
 
     .slide-old-val {
-      font-size: 20px;
-      color: #6b7280;
+      font-size: 18px;
+      color: #9ca3af;
       text-decoration: line-through;
     }
 
@@ -605,73 +648,89 @@
       color: #fff;
     }
 
-    /* Slider Arrows */
-    .slider-arrow {
+    /* BIG FLOATING SIDE ARROWS */
+    .slider-side-arrow {
       position: absolute;
-      top: 50%;
+      top: 55%;
       transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: rgba(13, 16, 23, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #fff;
-      font-size: 18px;
+      background: rgba(18, 23, 33, 0.9);
+      border: 2px solid var(--accent-orange);
+      color: var(--accent-orange);
+      font-size: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 10;
+      z-index: 20;
       transition: all 0.2s ease;
-      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
 
-    .slider-arrow:hover {
+    .slider-side-arrow:hover {
       background: var(--accent-orange);
       color: #000;
-      border-color: var(--accent-orange);
-      transform: translateY(-50%) scale(1.1);
+      transform: translateY(-50%) scale(1.15);
+      box-shadow: 0 6px 25px rgba(245, 158, 11, 0.6);
     }
 
-    .slider-arrow.prev { left: 15px; }
-    .slider-arrow.next { right: 15px; }
+    .slider-side-arrow.prev { left: 15px; }
+    .slider-side-arrow.next { right: 15px; }
 
-    /* Slider Dots */
-    .slider-dots {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* BOTTOM NUMBERED TABS FOR QUICK JUMP */
+    .slider-bottom-tabs {
       display: flex;
-      gap: 8px;
-      z-index: 10;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 20px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(10, 12, 16, 0.4);
+      flex-wrap: wrap;
     }
 
-    .slider-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
+    .slider-tab-pill {
+      background: #181d26;
+      border: 1px solid #2a3142;
+      color: #9ca3af;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .slider-dot.active {
+    .slider-tab-pill:hover {
+      background: #242c3b;
+      color: #fff;
+      border-color: #4b5563;
+    }
+
+    .slider-tab-pill.active {
       background: var(--accent-orange);
-      width: 26px;
-      border-radius: 8px;
+      color: #000;
+      font-weight: 800;
+      border-color: var(--accent-orange);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
     }
 
     @media (max-width: 850px) {
+      .trending-header-bar { padding: 14px 18px; }
       .slider-slide {
         grid-template-columns: 1fr;
-        padding: 60px 20px 30px;
+        padding: 25px 18px 20px;
         gap: 20px;
       }
-      .slide-photo-side { height: 240px; }
-      .slide-name-title { font-size: 22px; }
-      .slide-current-val { font-size: 28px; }
-      .slider-arrow { display: none; }
+      .slide-photo-side { height: 220px; }
+      .slide-name-title { font-size: 20px; }
+      .slide-current-val { font-size: 26px; }
+      .slider-side-arrow { display: none; }
+      .slider-tab-pill { font-size: 11px; padding: 6px 12px; }
     }
   </style>
 </head>
@@ -743,15 +802,27 @@
     </div>
 
     
-    <!-- HERO TRENDING SLIDER (PHOTO LEFT, NAME & BUY BUTTON RIGHT) -->
+    <!-- HERO TRENDING SLIDER (100% USER CONTROLLED - NO AUTO-ROTATION) -->
     <section class="trending-slider-wrapper" id="trendingSlider">
-      <div class="trending-badge-top">
-        <span class="pulse-dot"></span>
-        🔥 Trending Now • Best Sellers
+      
+      <!-- TOP HEADER BAR WITH CLEAR VISIBLE CONTROLS -->
+      <div class="trending-header-bar">
+        <div class="trending-badge-top">
+          <span class="pulse-dot"></span>
+          🔥 Trending Best Sellers
+        </div>
+        
+        <!-- PROMINENT NAVIGATION BUTTONS & COUNTER -->
+        <div class="slider-manual-controls">
+          <button class="slider-nav-btn" onclick="moveTrendingSlide(-1)" title="Previous Product">❮ Previous</button>
+          <span class="slider-counter-badge" id="sliderCounter">1 / 4</span>
+          <button class="slider-nav-btn" onclick="moveTrendingSlide(1)" title="Next Product">Next ❯</button>
+        </div>
       </div>
 
-      <button class="slider-arrow prev" onclick="moveTrendingSlide(-1)" aria-label="Previous">❮</button>
-      <button class="slider-arrow next" onclick="moveTrendingSlide(1)" aria-label="Next">❯</button>
+      <!-- BIG SIDE ARROWS FOR INSTANT CLICKING -->
+      <button class="slider-side-arrow prev" onclick="moveTrendingSlide(-1)" aria-label="Previous Slide">❮</button>
+      <button class="slider-side-arrow next" onclick="moveTrendingSlide(1)" aria-label="Next Slide">❯</button>
 
       <div class="slider-track" id="trendingTrack">
         
@@ -768,7 +839,6 @@
               <span class="slide-cat-tag">⚡ B2B Automation Software</span>
               <span class="slide-rating-tag">★★★★★ 4.9 (1,420 Reviews)</span>
             </div>
-            <!-- Product Name directly above Buy Button -->
             <h2 class="slide-name-title">LeadGen Pro — Automated B2B Lead Scraper & Cold Outreach Engine</h2>
             <div class="slide-price-box">
               <span class="slide-current-val">$99</span>
@@ -794,7 +864,6 @@
               <span class="slide-cat-tag">🤖 AI Video Automation</span>
               <span class="slide-rating-tag">★★★★★ 5.0 (2,890 Reviews)</span>
             </div>
-            <!-- Product Name directly above Buy Button -->
             <h2 class="slide-name-title">AutoReels AI — Faceless Video Generator & Social Media Auto-Poster</h2>
             <div class="slide-price-box">
               <span class="slide-current-val">$149</span>
@@ -820,7 +889,6 @@
               <span class="slide-cat-tag">💻 Next.js 14 Developer Kit</span>
               <span class="slide-rating-tag">★★★★★ 4.9 (3,110 Reviews)</span>
             </div>
-            <!-- Product Name directly above Buy Button -->
             <h2 class="slide-name-title">SaaS LaunchPad — Next.js 14 Full-Stack Boilerplate (PayPal + Stripe)</h2>
             <div class="slide-price-box">
               <span class="slide-current-val">$199</span>
@@ -846,7 +914,6 @@
               <span class="slide-cat-tag">🎬 Video Editing Presets</span>
               <span class="slide-rating-tag">★★★★★ 4.9 (1,940 Reviews)</span>
             </div>
-            <!-- Product Name directly above Buy Button -->
             <h2 class="slide-name-title">Cinematic LUTs & Sound Library (2,500+ Assets for Premiere & CapCut)</h2>
             <div class="slide-price-box">
               <span class="slide-current-val">$49</span>
@@ -861,12 +928,12 @@
 
       </div>
 
-      <!-- Dots Indicators -->
-      <div class="slider-dots" id="trendingDots">
-        <span class="slider-dot active" onclick="jumpTrendingSlide(0)"></span>
-        <span class="slider-dot" onclick="jumpTrendingSlide(1)"></span>
-        <span class="slider-dot" onclick="jumpTrendingSlide(2)"></span>
-        <span class="slider-dot" onclick="jumpTrendingSlide(3)"></span>
+      <!-- BOTTOM TABS FOR 1-CLICK JUMP TO ANY PRODUCT -->
+      <div class="slider-bottom-tabs" id="trendingTabs">
+        <button class="slider-tab-pill active" onclick="jumpTrendingSlide(0)">1. LeadGen Pro ($99)</button>
+        <button class="slider-tab-pill" onclick="jumpTrendingSlide(1)">2. AutoReels AI ($149)</button>
+        <button class="slider-tab-pill" onclick="jumpTrendingSlide(2)">3. SaaS LaunchPad ($199)</button>
+        <button class="slider-tab-pill" onclick="jumpTrendingSlide(3)">4. Cinematic LUTs ($49)</button>
       </div>
     </section>
 
@@ -1353,22 +1420,26 @@
 
   <script>
     
-    // AUTO-PLAYING & DRAGGABLE TRENDING SLIDER LOGIC
+    // MANUAL-ONLY TRENDING SLIDER LOGIC (100% USER CONTROLLED)
     let currentTrendingSlide = 0;
     const totalTrendingSlides = 4;
-    let trendingInterval = null;
 
     function updateTrendingSlider() {
       const track = document.getElementById('trendingTrack');
-      const dots = document.querySelectorAll('.slider-dot');
+      const counter = document.getElementById('sliderCounter');
+      const pills = document.querySelectorAll('.slider-tab-pill');
+
       if (track) {
         track.style.transform = 'translateX(-' + (currentTrendingSlide * 100) + '%)';
       }
-      dots.forEach((dot, idx) => {
+      if (counter) {
+        counter.innerText = (currentTrendingSlide + 1) + ' / ' + totalTrendingSlides;
+      }
+      pills.forEach((pill, idx) => {
         if (idx === currentTrendingSlide) {
-          dot.classList.add('active');
+          pill.classList.add('active');
         } else {
-          dot.classList.remove('active');
+          pill.classList.remove('active');
         }
       });
     }
@@ -1381,40 +1452,16 @@
         currentTrendingSlide = totalTrendingSlides - 1;
       }
       updateTrendingSlider();
-      resetTrendingAutoPlay();
     }
 
     function jumpTrendingSlide(idx) {
       currentTrendingSlide = idx;
       updateTrendingSlider();
-      resetTrendingAutoPlay();
     }
 
-    function startTrendingAutoPlay() {
-      trendingInterval = setInterval(() => {
-        moveTrendingSlide(1);
-      }, 4500);
-    }
-
-    function resetTrendingAutoPlay() {
-      if (trendingInterval) clearInterval(trendingInterval);
-      startTrendingAutoPlay();
-    }
-
-    // Start auto-play when page loads
-    startTrendingAutoPlay();
-
-    // Pause slider on hover
+    // MOUSE DRAG & TOUCH SWIPE SUPPORT
     const sliderContainer = document.getElementById('trendingSlider');
     if (sliderContainer) {
-      sliderContainer.addEventListener('mouseenter', () => {
-        if (trendingInterval) clearInterval(trendingInterval);
-      });
-      sliderContainer.addEventListener('mouseleave', () => {
-        startTrendingAutoPlay();
-      });
-
-      // MOUSE DRAG & TOUCH SWIPE SUPPORT
       let startX = 0;
       let currentX = 0;
       let isDragging = false;
@@ -1422,7 +1469,6 @@
       sliderContainer.addEventListener('mousedown', (e) => {
         isDragging = true;
         startX = e.clientX;
-        if (trendingInterval) clearInterval(trendingInterval);
       });
 
       window.addEventListener('mousemove', (e) => {
@@ -1439,13 +1485,11 @@
         } else if (diffX < -50) {
           moveTrendingSlide(1);  // Swiped left -> go to next
         }
-        startTrendingAutoPlay();
       });
 
-      // Touch events for mobile phones/tablets
+      // Touch events for mobile phones
       sliderContainer.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
-        if (trendingInterval) clearInterval(trendingInterval);
       }, { passive: true });
 
       sliderContainer.addEventListener('touchend', (e) => {
@@ -1456,7 +1500,6 @@
         } else if (diffX < -50) {
           moveTrendingSlide(1);
         }
-        startTrendingAutoPlay();
       }, { passive: true });
     }
 
