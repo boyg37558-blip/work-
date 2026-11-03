@@ -296,6 +296,230 @@
     }
     .back-store-btn:hover { color: #fff; border-color: #fff; }
 
+    /* WARRANTY CERTIFICATE STYLING */
+    .warranty-certificate-card {
+      background: linear-gradient(145deg, #0d1117 0%, #161b22 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 18px;
+      padding: 35px 30px;
+      margin: 40px 0 30px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(245, 158, 11, 0.15);
+      overflow: hidden;
+    }
+    .warranty-certificate-card::before {
+      content: "OFFICIAL WARRANTY";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      font-size: 55px;
+      font-weight: 900;
+      color: rgba(245, 158, 11, 0.03);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: 6px;
+    }
+    .warranty-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 15px;
+      border-bottom: 1px solid #262b36;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .warranty-header-left h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .warranty-header-left p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .warranty-badge-pill {
+      background: #f59e0b;
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .warranty-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      background: #090b0f;
+      border: 1px solid #262b36;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 25px;
+    }
+    .warranty-meta-item small {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .warranty-meta-item strong {
+      font-size: 14px;
+      color: #fff;
+    }
+    .warranty-section-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #f59e0b;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .warranty-steps-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    .warranty-step-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid #1f242d;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .warranty-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .warranty-step-text h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .warranty-step-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .warranty-terms-box {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 25px;
+    }
+    .warranty-terms-box h4 {
+      color: #f87171;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .warranty-terms-box p {
+      font-size: 12.5px;
+      color: #d1d5db;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .warranty-terms-box ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 8px;
+    }
+    .warranty-terms-box li {
+      font-size: 12.5px;
+      color: #9ca3af;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .warranty-terms-box li strong {
+      color: #f3f4f6;
+    }
+    .warranty-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid #262b36;
+    }
+    .btn-print-certificate {
+      background: transparent;
+      border: 1px solid #f59e0b;
+      color: #f59e0b;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-print-certificate:hover {
+      background: #f59e0b;
+      color: #000;
+    }
+    .warranty-desk-email {
+      color: #9ca3af;
+      font-size: 13px;
+      margin-left: auto;
+    }
+    .warranty-desk-email a {
+      color: #f59e0b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @media print {
+      header, footer, .support-bar, .master-download-box, .modules-title, .modules-grid, .instructions-box, .order-status-banner, .check-icon, h1, .subtext, .btn-print-certificate {
+        display: none !important;
+      }
+      body { background: #fff !important; color: #000 !important; }
+      .main-container, .success-card { max-width: 100% !important; margin: 0 !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
+      .warranty-certificate-card {
+        border: 2px solid #000 !important;
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .warranty-certificate-card h2, .warranty-certificate-card h4, .warranty-certificate-card strong { color: #000 !important; }
+      .warranty-certificate-card p, .warranty-certificate-card span, .warranty-certificate-card small, .warranty-certificate-card li { color: #333 !important; }
+      .warranty-meta-grid, .warranty-step-item, .warranty-terms-box { background: #f9fafb !important; border-color: #ccc !important; }
+    }
+
     footer {
       border-top: 1px solid var(--border-color);
       padding: 24px;
@@ -393,6 +617,128 @@
         </ul>
       </div>
 
+      <!-- OFFICIAL 1-YEAR DIGITAL WARRANTY CERTIFICATE -->
+      <div class="warranty-certificate-card" id="warrantyCard">
+        <div class="warranty-header">
+          <div class="warranty-header-left">
+            <h2>
+              <span>🛡️</span> Official 1-Year Digital Warranty Certificate
+            </h2>
+            <p>DigiStoreX Verified Guarantee & Lifetime Commercial Technical Protection</p>
+          </div>
+          <div class="warranty-badge-pill">
+            <span>✓</span> 365 DAYS ACTIVE COVERAGE
+          </div>
+        </div>
+
+        <div class="warranty-meta-grid">
+          <div class="warranty-meta-item">
+            <small>Covered Product</small>
+            <strong id="warrantyProductName">AutoReels AI — Faceless Video Generator</strong>
+          </div>
+          <div class="warranty-meta-item">
+            <small>Warranty Period</small>
+            <strong style="color:var(--accent-orange);">1 Year (365 Days)</strong>
+          </div>
+          <div class="warranty-meta-item">
+            <small>Issue Date</small>
+            <strong id="warrantyIssueDate">November 3, 2026</strong>
+          </div>
+          <div class="warranty-meta-item">
+            <small>Expiration Date</small>
+            <strong id="warrantyExpiryDate">November 3, 2027</strong>
+          </div>
+          <div class="warranty-meta-item">
+            <small>Certificate ID</small>
+            <strong id="warrantySerialId" style="font-family:monospace; color:#10b981;">DGX-WRN-2026-8849</strong>
+          </div>
+          <div class="warranty-meta-item">
+            <small>Warranty Status</small>
+            <strong style="color:#10b981;">🟢 Active & Registered</strong>
+          </div>
+        </div>
+
+        <div class="warranty-section-title">
+          <span>🛠️</span> How to Claim Warranty & Get Free Technical Support
+        </div>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">
+          If you ever experience any installation issue, runtime error, or unexpected bug with your purchased software, follow these exact 4 steps:
+        </p>
+
+        <div class="warranty-steps-list">
+          <div class="warranty-step-item">
+            <div class="warranty-step-num">1</div>
+            <div class="warranty-step-text">
+              <h4>Clean Device Re-installation Check</h4>
+              <p>Before submitting a ticket, completely uninstall or delete the current software folder from your device, restart your system, and re-extract the fresh original package downloaded from your DigiStoreX link.</p>
+            </div>
+          </div>
+
+          <div class="warranty-step-item">
+            <div class="warranty-step-num">2</div>
+            <div class="warranty-step-text">
+              <h4>Contact Priority Warranty Support</h4>
+              <p>If the error persists after reinstallation, immediately email our engineering support desk at <strong style="color:#fff;">boyg37558@gmail.com</strong> or message our live 24/7 Chat Support on WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="warranty-step-item">
+            <div class="warranty-step-num">3</div>
+            <div class="warranty-step-text">
+              <h4>Send File Details & Proof (Screenshots / Recording)</h4>
+              <p>Send us your Warranty Certificate ID, the exact downloaded file name, a clear description of the issue, and screenshot(s) or screen recording showing the error. This helps our developers quickly replicate and solve it.</p>
+            </div>
+          </div>
+
+          <div class="warranty-step-item">
+            <div class="warranty-step-num">4</div>
+            <div class="warranty-step-text">
+              <h4>100% Free 365-Day Resolution Guarantee</h4>
+              <p>Within your 1-year warranty coverage, DigiStoreX takes full technical responsibility for all genuine software defects, runtime bugs, and OS updates at zero additional charge.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TERMS & TAMPER PROTECTION CLAUSE -->
+        <div class="warranty-terms-box">
+          <h4>⚠️ Important Warranty Terms & Code Tampering Protection Policy</h4>
+          <p>
+            Our 1-year warranty covers all official software packages, natural bug patches, and standard environment setups. Please read our fair-use protection policy carefully:
+          </p>
+          <ul>
+            <li>
+              <span>🔒</span>
+              <div>
+                <strong>Tampering / Code Alteration Notice:</strong> The free 1-year warranty strictly applies to unmodified factory files. If the user or a third party manually alters source scripts, modifies internal codebase structures, deletes core system files, or customizes the code and encounters errors, the free warranty becomes VOID for that breakdown.
+              </div>
+            </li>
+            <li>
+              <span>⚙️</span>
+              <div>
+                <strong>Developer Repair Service Policy (50% Advance Deposit):</strong> If you broke or modified your code and request our engineering team to inspect, fix, or rebuild your customized software, a developer repair fee applies (standard diagnostic fee, e.g. ₹4,000 / $50 depending on project complexity):
+                <br>• <strong>50% Advance Deposit:</strong> You must deposit 50% upfront before developer debugging begins.
+                <br>• <strong>50% Balance on Delivery:</strong> The remaining 50% is paid after your product is fully repaired, tested, and delivered back to you in working condition.
+                <br>• <strong>Option to Decline:</strong> If you decline the repair fee, your original unmodified factory package will simply be re-sent to you at zero charge.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="warranty-actions">
+          <button type="button" class="btn-print-certificate" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print / Save Warranty Card (PDF)
+          </button>
+          <div class="warranty-desk-email">
+            Priority Warranty Desk: <a href="mailto:boyg37558@gmail.com">boyg37558@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
       <!-- SUPPORT -->
       <div class="support-bar">
         <a href="https://wa.me/918799484961?text=Hi%20DigiStoreX%20Support,%20I%20just%20purchased%20a%20product%20and%20need%20help" target="_blank" class="whatsapp-btn">
@@ -413,11 +759,36 @@
     const prodId = params.get('id');
     const prodName = params.get('name');
 
+    let displayTitle = 'DigiStoreX Complete Master Creator Suite';
     if (prodName) {
-      document.getElementById('orderHeaderTitle').textContent = decodeURIComponent(prodName) + ' — Instant Access';
+      displayTitle = decodeURIComponent(prodName);
     } else if (prodId) {
-      document.getElementById('orderHeaderTitle').textContent = prodId.replace(/-/g, ' ').toUpperCase() + ' — Instant Access';
+      displayTitle = prodId.replace(/-/g, ' ').toUpperCase();
     }
+    document.getElementById('orderHeaderTitle').textContent = displayTitle + ' — Instant Access';
+
+    // Warranty Card Dynamic Details
+    const warrantyProductEl = document.getElementById('warrantyProductName');
+    if (warrantyProductEl) {
+      warrantyProductEl.textContent = displayTitle;
+    }
+
+    // Dynamic Issue Date & 1-Year Expiration Date
+    const today = new Date();
+    const issueDateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const expiryDate = new Date();
+    expiryDate.setDate(today.getDate() + 365);
+    const expiryDateStr = expiryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    const issueDateEl = document.getElementById('warrantyIssueDate');
+    const expiryDateEl = document.getElementById('warrantyExpiryDate');
+    if (issueDateEl) issueDateEl.textContent = issueDateStr;
+    if (expiryDateEl) expiryDateEl.textContent = expiryDateStr;
+
+    // Unique Serial ID
+    const randomSeed = Math.random().toString(36).substring(2, 7).toUpperCase();
+    const serialEl = document.getElementById('warrantySerialId');
+    if (serialEl) serialEl.textContent = 'DGX-WRN-' + today.getFullYear() + '-' + randomSeed;
   </script>
 </body>
 </html>
